@@ -1,0 +1,3 @@
+Rubydraw is a high level drawing/gaming library written in Ruby, like Gosu or Rubygame. Its only dependency is ruby-sdl-ffi, which it uses to access SDL functions.
+-----
+NOTE: This first version is just a test to see if I can get this uploaded successfully to rubygems.org, so it has _no_ functionality yet!
