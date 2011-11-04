@@ -1,6 +1,9 @@
-          # Rubydraw is a high level drawing/gaming library written in Ruby, like Gosu or Rubygame. Its only dependency is ruby-sdl-ffi, which it uses to access SDL functions.
-          # NOTE: ruby-sdl-ffi does NOT work with Ruby 1.9.2 (at least for me)! I will try to fix this big issue. In the meantime, please use <= Ruby 1.8. Sorry for the inconvenience!
-          # Other stuff: I stole the Window#update and Window#draw proudly from Gosu. It is a good Ruby and C++ library, and I suggest you try it. But try Rubydraw first! :P
+          # Rubydraw is a high level drawing/gaming library, like Gosu or Rubygame, and is written in Ruby.
+          # Its only dependency is ruby-sdl-ffi, which it uses to access SDL functions.
+		      # –––––
+          # NOTE: ruby-sdl-ffi does NOT work with Ruby 1.9.2 (at least for me), so I can't test Rubydraw
+    		  # with Ruby 1.9.2. If you know how to solve this (if it is just my machine), please notify me. In
+		      # the mean time, you'll have to use 1.8. Sorry for the inconvinience!
 module Rubydraw
           # Instances of Window can draw themselves on the screen after you open them. To draw images, use the Image class and pass a Window instance a parameter.
   class Window
@@ -15,10 +18,10 @@ module Rubydraw
     def open
       @open = true
           # Behold, the main loop. Drumroll!
+      SDL::SetVideoMode(@width, @height, 0, 0)
       loop do
         update
         draw
-        @screen = SDL::SetVideoMode(@width, @height, 0, 0)
         SDL::UpdateRect(@screen, 1, 1, 1, 1)
       end
     end
