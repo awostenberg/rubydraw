@@ -14,6 +14,8 @@ SPEC = Gem::Specification.new do |spec|
   spec.homepage       = "https://github.com/awostenberg/rubydraw"
   spec.platform       = Gem::Platform::RUBY
   spec.require_paths  << "lib"
-  spec.files          = ["README", "lib/rubydraw.rb", "lib/rubydraw/window.rb", "examples/window_example.rb"]
+  lib_files           = ["lib/rubydraw.rb", "lib/rubydraw/window.rb", "lib/rubydraw/image.rb", "lib/rubydraw/draw_error.rb"]
+  examples            = ["examples/window_ex.rb", "examples/image_ex.rb", "examples/media/bug.png"]
+  spec.files          = ["README", lib_files, examples].flatten
   spec.add_dependency("ruby-sdl-ffi", ">= 0.4")
 end

@@ -1,57 +1,73 @@
-          # Rubydraw is a high level drawing/gaming library, like Gosu or Rubygame, and is written in Ruby.
-          # Its only dependency is ruby-sdl-ffi, which it uses to access SDL functions.
-		      # –––––
-          # NOTE: ruby-sdl-ffi does NOT work with Ruby 1.9.2 (at least for me), so I can't test Rubydraw
-    		  # with Ruby 1.9.2. If you know how to solve this (if it is just my machine), please notify me. In
-		      # the mean time, you'll have to use 1.8. Sorry for the inconvinience!
 module Rubydraw
-          # Instances of Window can draw themselves on the screen after you open them. To draw images, use the Image class and pass a Window instance a parameter.
+  # Instances of Rubydraw::Window can draw themselves on the screen after you open them.
+  # Note: there can only be one window on the screen at a time; it is a limit
+  # of SDL. One important things about instances of Rubydraw::Window: its main loop
+  # (which starts when Rubydraw::Window#open is called) is *not* forked! It will break
+  # when Rubydraw::Window#close is called (as soon as I get around to implementing this).
   class Window
-          # Create a new window
+    # Create a new window.
     def initialize(width, height)
       @width = width
       @height = height
       @open = false
     end
 
-          # Call this method to start updating and drawing
+    # Call this method to start updating and drawing.
     def open
       @open = true
-          # Behold, the main loop. Drumroll!
-      SDL::SetVideoMode(@width, @height, 0, 0)
+      # Behold, the main loop. Drumroll!
+      @screen = SDL::SetVideoMode(@width, @height, 0, 0)
       loop do
-        update
-        draw
-        SDL::UpdateRect(@screen, 1, 1, 1, 1)
+        tick
+        if @open
+          # Update the screen to show any changes.
+          SDL::UpdateRect(@screen, 0, 0, 0, 0)
+        else
+          # This is where the loop is broken after Rubydraw::Window#close is called.
+          break
+        end
+          # Pause for a bit, so it's not such a tight loop.
+        sleep 0.1
       end
     end
 
-          # Call this method to cease updating and drawing
+    # Call this method to tell SDL to quit drawing. The loop (started in
+    # Rubydraw::Window#open) would continue if +close+ only stopped drawing, so
+    # break the loop too.
     def close
+      break_main_loop
+      SDL.QuitSubSystem(SDL::INIT_VIDEO)
+    end
+
+    # This causes the main loop to stop executing. Use Rubydraw::Window#close to close
+    # the window, not this.
+    def break_main_loop
       @open = false
     end
 
-          # Returns if this window is open
+    # Returns if this window is open.
     def open?
       @open
     end
 
-          # Redefine this method and put any code here you want to be executed every frame.
-          # Does nothing by default.
-    def update
+    def sdl_surface
+      @screen
     end
 
-          # Redefine this method and put your drawing code in it.
-          # Does nothing by default.
-    def draw
+
+    # Redefine Rubydraw::Window#tick with any code you want to be executed
+    # every frame, like drawing functions.
+    #
+    # Does nothing by default.
+    def tick
     end
 
-          # Return the width of this window
+    # Return the width of this window.
     def width
       @width
     end
 
-          # Return the height of this window
+    # Return the height of this window.
     def height
       @height
     end

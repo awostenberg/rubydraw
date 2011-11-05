@@ -1,5 +1,4 @@
 require 'rubygems'
-#require 'gosu'
 require 'rubydraw'
 
 class MyWindow < Rubydraw::Window
@@ -29,5 +28,5 @@ h = gets.to_i
 
 window = MyWindow.new(w, h).open
 
-          # Wait for a while to let the user enjoy the window
+# Wait for a while to let the user enjoy the window
 sleep 10
