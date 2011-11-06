@@ -10,6 +10,8 @@ module Rubydraw
       @width = width
       @height = height
       @open = false
+
+      @event_queue = EventQueue.new
     end
 
     # Call this method to start updating and drawing.
@@ -18,6 +20,7 @@ module Rubydraw
       # Behold, the main loop. Drumroll!
       @screen = SDL::SetVideoMode(@width, @height, 0, 0)
       loop do
+        handle_events
         tick
         if @open
           # Update the screen to show any changes.
@@ -39,6 +42,18 @@ module Rubydraw
       SDL.QuitSubSystem(SDL::INIT_VIDEO)
     end
 
+    # Collect and handle new events (via Rubydraw::Window#handle_event) that have
+    # appeared since the last tick.
+    def handle_events
+      events = @event_queue.get_events
+      events.each {|event| puts event.class; puts; handle_event(event)}
+    end
+
+    # Redefine this in a subclass to use custom event handling. Does nothing by
+    # default.
+    def handle_event(event)
+    end
+
     # This causes the main loop to stop executing. Use Rubydraw::Window#close to close
     # the window, not this.
     def break_main_loop
@@ -50,6 +65,8 @@ module Rubydraw
       @open
     end
 
+    # Return the SDL surface object. Only used in Rubydraw::Image#draw for blitting to
+    # this window.
     def sdl_surface
       @screen
     end

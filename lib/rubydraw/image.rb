@@ -32,7 +32,6 @@ module Rubydraw
       source_rect = SDL::Rect.new([0, 0, width, height])
       blit_rect = SDL::Rect.new([x, y, @window.width, @window.height])
       SDL::BlitSurface(@sdl_image, source_rect, @window.sdl_surface, blit_rect)
-      #SDL::BlitSurface(@sdl_image, nil, @window.sdl_surface, nil)
     end
 
     # Returns the image width
