@@ -16,8 +16,19 @@ class MyWindow < Rubydraw::Window
 
   def handle_event(event)
     case event
-    when SDL::QuitEvent
-      close
+      when Rubydraw::Events::UnknownEvent
+        puts "Unknown event"
+      when Rubydraw::Events::MouseMove
+        puts "Mouse moved to #{event.x}, #{event.y}"
+      when Rubydraw::Events::MousePressed
+        if (b = event.which) == 0
+          puts "Mouse button released"
+        else
+          puts "#{event.which} mouse button pressed"
+        end
+      when Rubydraw::Events::Quit
+        puts "Closing"
+        close
     end
   end
 

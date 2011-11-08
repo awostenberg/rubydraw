@@ -21,8 +21,8 @@ module Rubydraw
       @screen = SDL::SetVideoMode(@width, @height, 0, 0)
       loop do
         handle_events
-        tick
         if @open
+          tick
           # Update the screen to show any changes.
           SDL::UpdateRect(@screen, 0, 0, 0, 0)
         else
@@ -46,7 +46,8 @@ module Rubydraw
     # appeared since the last tick.
     def handle_events
       events = @event_queue.get_events
-      events.each {|event| puts event.class; puts; handle_event(event)}
+      #puts events
+      #events.each {|event| handle_event(event)}
     end
 
     # Redefine this in a subclass to use custom event handling. Does nothing by
@@ -54,8 +55,8 @@ module Rubydraw
     def handle_event(event)
     end
 
-    # This causes the main loop to stop executing. Use Rubydraw::Window#close to close
-    # the window, not this.
+    # This causes the main loop to exit. Use Rubydraw::Window#close to close the
+    # window, not this.
     def break_main_loop
       @open = false
     end

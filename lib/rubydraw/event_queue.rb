@@ -8,7 +8,7 @@ module Rubydraw
     def get_events
       events = []
       until((event = SDL::PollEvent()).nil?)
-        events << event
+        events << Events.match(event)
       end
       events
     end

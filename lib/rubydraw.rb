@@ -7,7 +7,7 @@ def rbd_require(file)
 end
 
 # Require all the rubydraw files
-files = ["window", "image", "draw_error", "event_queue"]
+files = ["window", "image", "draw_error", "event_queue", "events"]
 files.each {|f| rbd_require f}
 
 # Rubydraw is a high level game/graphics library, like Gosu or Rubygame, and is written completely

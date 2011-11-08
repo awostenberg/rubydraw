@@ -6,18 +6,11 @@ class MyWindow < Rubydraw::Window
     super(width, height)
     puts "New window created with width: #{@width} and height #{@height}"
   end
-
-  def tick
-    update
-    draw
-  end
-
-  def update
-    #puts "Updated!"
-  end
-
-  def draw
-    #puts "Drawn!"
+  def handle_event(event)
+    case event
+    when Rubydraw::Event::Quit
+      close
+    end
   end
 end
 
