@@ -46,8 +46,7 @@ module Rubydraw
     # appeared since the last tick.
     def handle_events
       events = @event_queue.get_events
-      #puts events
-      #events.each {|event| handle_event(event)}
+      events.each {|event| handle_event(event)}
     end
 
     # Redefine this in a subclass to use custom event handling. Does nothing by
