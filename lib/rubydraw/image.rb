@@ -23,14 +23,14 @@ module Rubydraw
       end
     end
 
-    # Blit (copy) into the window at +x+ and +y.+
+    # Blit (copy) into the window at +position+ (see point.rb).
     # No graphical effects are applied.
     #
     # Notice that you don't blit surfaces to other surfaces when using
-    # Rubygame, but instead you draw them.
-    def draw(x, y)
+    # Rubygame, but instead you draw things.
+    def draw(position)
       source_rect = SDL::Rect.new([0, 0, width, height])
-      blit_rect = SDL::Rect.new([x, y, @window.width, @window.height])
+      blit_rect = SDL::Rect.new([position.x, position.y, @window.width, @window.height])
       SDL::BlitSurface(@sdl_image, source_rect, @window.sdl_surface, blit_rect)
     end
 

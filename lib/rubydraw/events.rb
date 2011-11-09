@@ -53,19 +53,19 @@ module Rubydraw
     # button.
     class MousePressed < Event
       def self.from_sdl_event(sdl_event)
-        self.new(sdl_event.x, sdl_event.y, sdl_event.button)
+        self.new(Point[sdl_event.x, sdl_event.y], sdl_event.button)
       end
 
       def self.matching_sdl_event
         SDL::MOUSEBUTTONDOWN
       end
 
-      attr_accessor(:x, :y, :button)
+      attr_accessor(:position, :button)
 
-      # Creates a new MousePressed event, specifying where it happened (the x and y pos.)
+      # Creates a new MousePressed event, specifying where (the position) it happened
       # and what button was pressed.
-      def initialize(x, y, button)
-        @x, @y, @button = x, y, button
+      def initialize(position, button)
+        @position, @button = position, button
       end
     end
 
@@ -73,41 +73,41 @@ module Rubydraw
     # button.
     class MouseReleased < Event
       def self.from_sdl_event(sdl_event)
-        self.new(sdl_event.x, sdl_event.y, sdl_event.button)
+        self.new(Point[sdl_event.x, sdl_event.y], sdl_event.button)
       end
 
       def self.matching_sdl_event
         SDL::MOUSEBUTTONUP
       end
 
-      attr_accessor(:x, :y, :button)
+      attr_accessor(:position, :button)
 
-      # Creates a new MouseReleased event, specifying where it happened (the x and y pos.) and
+      # Creates a new MouseReleased event, specifying where (the position) it happened and
       # what button was released.
-      def initialize(x, y, button)
-        @x, @y, @button = x, y, button
+      def initialize(position, button)
+        @position, @button = position, button
       end
     end
 
     # Created when the mouse is moved.
     class MouseMove < Event
       def self.from_sdl_event(sdl_event)
-        self.new(sdl_event.x, sdl_event.y, sdl_event.xrel, sdl_event.yrel)
+        self.new(Point[sdl_event.x, sdl_event.y], Point[sdl_event.xrel, sdl_event.yrel])
       end
 
       def self.matching_sdl_event
         SDL::MOUSEMOTION
       end
 
-      attr_accessor(:x, :y, :relative_x, :relative_y)
+      attr_accessor(:position, :relative_position)
 
       # Create a new MouseMove event with the new mouse position.
       #
       # +x+ and +y+:                     The new position of the cursor.
       #
       # +relative_x+ and +relative_y+:  The relative movement of the cursor since the last tick.
-      def initialize(x, y, relative_y, relative_x)
-        @x, @y, @relative_x, @relative_y = x, y, relative_x, relative_y
+      def initialize(position, relative_position)
+        @position, @relative_position = position, relative_position
       end
     end
 

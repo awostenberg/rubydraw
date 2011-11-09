@@ -1,14 +1,9 @@
 # The only dependency
 require 'ruby-sdl-ffi'
 
-# So I don't have to type +rubydraw/required_file+ all the time
-def rbd_require(file)
-  require "rubydraw/#{file}"
-end
-
 # Require all the rubydraw files
-files = ["window", "image", "draw_error", "event_queue", "events"]
-files.each {|f| rbd_require f}
+files = ["window", "image", "draw_error", "event_queue", "events", "point"]
+files.each {|f| require("rubydraw/" + f)}
 
 # Rubydraw is a high level game/graphics library, like Gosu or Rubygame, and is written completely
 # in Ruby. Its only dependency is ruby-sdl-ffi, which it uses to access SDL functions.

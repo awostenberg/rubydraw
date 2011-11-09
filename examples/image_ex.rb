@@ -7,12 +7,11 @@ class MyWindow < Rubydraw::Window
     super(width, height)
     @image = Rubydraw::Image.new(self, "media/bug.png")
     @max = 100
-    @x = 0
   end
 
   # Draw the image inside this window, and stop after +@max+ ticks.
   def tick
-    @image.draw(width / 2, height / 2)
+    @image.draw(Rubydraw::Point[width / 2, height / 2])
   end
 
   def handle_event(event)
@@ -20,7 +19,7 @@ class MyWindow < Rubydraw::Window
       when Rubydraw::Events::UnknownEvent
         puts "Unknown event"
       when Rubydraw::Events::MouseMove
-        puts "Mouse moved to #{event.x}, #{event.y}"
+        puts "Mouse moved to #{event.position.x}, #{event.position.y}"
       when Rubydraw::Events::MousePressed
         puts "Mouse button #{event.button} pressed."
       when Rubydraw::Events::MouseReleased
