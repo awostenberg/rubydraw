@@ -10,7 +10,7 @@ module Rubydraw
     def initialize(window, path)
       @window = window
       unless window.is_a?(Rubydraw::Window)
-        raise Rubydraw::DrawError "Window cannot be nil"
+        raise Rubydraw::SDLError "Window cannot be nil"
       end
       # In case program is being run from a different directory,
       # provide the _full_ path. Nothing relative here.
@@ -19,7 +19,7 @@ module Rubydraw
       if @sdl_image.pointer.null?
         # SDL couln't load the image; usually happens because it doesn't
         # exist.
-        raise Rubydraw::DrawError "Failed to load image from: '#{full_path}'"
+        raise Rubydraw::SDLError "Failed to load image from: '#{full_path}'"
       end
     end
 

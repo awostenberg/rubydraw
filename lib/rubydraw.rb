@@ -2,7 +2,15 @@
 require 'ruby-sdl-ffi'
 
 # Require all the rubydraw files
-files = ["window", "image", "draw_error", "event_queue", "events", "point"]
+#files = ["window", "image", "sdl_error", "event_queue", "events", "point"]
+files = %w[
+  window
+  image
+  sdl_error
+  keys
+  event_queue
+  events
+  point]
 files.each {|f| require("rubydraw/" + f)}
 
 # Rubydraw is a high level game/graphics library, like Gosu or Rubygame, and is written completely

@@ -13,6 +13,9 @@ module Rubydraw
 
     # Create a new point with the given +x+ and +y+ positions.
     def initialize(x, y)
+      unless x.is_a?(Numeric) and y.is_a?(Numeric)
+        raise RuntimeError "New Point x and y must be a number."
+      end
       @x, @y = x, y
     end
   end

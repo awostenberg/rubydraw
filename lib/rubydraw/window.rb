@@ -7,6 +7,11 @@ module Rubydraw
   class Window
     # Create a new window.
     def initialize(width, height)
+      unless height.is_a?(Numeric) and width.is_a?(Numeric)
+        # Raise an error
+        raise SDLError "Window width and height have to be a number."
+      end
+
       @width = width
       @height = height
       @open = false

@@ -18,6 +18,34 @@ class MyWindow < Rubydraw::Window
     case event
       when Rubydraw::Events::UnknownEvent
         puts "Unknown event"
+      when Rubydraw::Events::KeyPressed
+        key_name = case event.key
+                      when Rubydraw::Keys::KbUp
+                        "Up"
+                      when Rubydraw::Keys::KbDown
+                        "Down"
+                      when Rubydraw::Keys::KbRight
+                        "Right"
+                      when Rubydraw::Keys::KbLeft
+                        "Left"
+                     else
+                        "Some other"
+                   end
+        puts "#{key_name} button pressed."
+      when Rubydraw::Events::KeyReleased
+        key_name = case event.key
+                      when Rubydraw::Keys::KbUp
+                        "Up"
+                      when Rubydraw::Keys::KbDown
+                        "Down"
+                      when Rubydraw::Keys::KbRight
+                        "Right"
+                      when Rubydraw::Keys::KbLeft
+                        "Left"
+                     else
+                        "Some other"
+                   end
+        puts "#{key_name} button released."
       when Rubydraw::Events::MouseMove
         puts "Mouse moved to #{event.position.x}, #{event.position.y}"
       when Rubydraw::Events::MousePressed
@@ -25,7 +53,7 @@ class MyWindow < Rubydraw::Window
       when Rubydraw::Events::MouseReleased
         puts "Mouse button #{event.button} released."
       when Rubydraw::Events::Quit
-        puts "Closing"
+        puts "Closing, goodbye!"
         close
     end
   end
@@ -33,4 +61,3 @@ end
 
 w = MyWindow.new(300, 300)
 w.open
-puts "Exiting, goodbye!"
