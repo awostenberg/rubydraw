@@ -162,6 +162,13 @@ module Rubydraw
       end
     end
 
+    # Created either when the window gains or loses focus.
+    class WindowFocus
+      def from_sdl_event(sdl_event)
+        self.new(sdl_event.gain)
+      end
+    end
+
     # Created when the user attempts to close the window.
     class Quit < Event
       def self.matching_sdl_event

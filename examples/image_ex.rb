@@ -18,34 +18,12 @@ class MyWindow < Rubydraw::Window
     case event
       when Rubydraw::Events::UnknownEvent
         puts "Unknown event"
-      when Rubydraw::Events::KeyPressed
-        key_name = case event.key
-                      when Rubydraw::Keys::KbUp
-                        "Up"
-                      when Rubydraw::Keys::KbDown
-                        "Down"
-                      when Rubydraw::Keys::KbRight
-                        "Right"
-                      when Rubydraw::Keys::KbLeft
-                        "Left"
-                     else
-                        "Some other"
-                   end
-        puts "#{key_name} button pressed."
-      when Rubydraw::Events::KeyReleased
-        key_name = case event.key
-                      when Rubydraw::Keys::KbUp
-                        "Up"
-                      when Rubydraw::Keys::KbDown
-                        "Down"
-                      when Rubydraw::Keys::KbRight
-                        "Right"
-                      when Rubydraw::Keys::KbLeft
-                        "Left"
-                     else
-                        "Some other"
-                   end
-        puts "#{key_name} button released."
+      when Rubydraw::Events::MousePressed
+        button = button_name(event.button)
+        puts "#{button} pressed."
+      when Rubydraw::Events::MouseReleased
+        button = button_name(event.button)
+        puts "#{button} released."
       when Rubydraw::Events::MouseMove
         puts "Mouse moved to #{event.position.x}, #{event.position.y}"
       when Rubydraw::Events::MousePressed
@@ -55,6 +33,21 @@ class MyWindow < Rubydraw::Window
       when Rubydraw::Events::Quit
         puts "Closing, goodbye!"
         close
+    end
+  end
+
+  def button_name(number)
+    name = case number
+      when Rubydraw::Keys::UpArrow
+        "Up arrow"
+      when Rubydraw::Keys::DownArrow
+        "Down arrow"
+      when Rubydraw::Keys::RightArrow
+        "Right arrow"
+      when Rubydraw::Keys::LeftArrow
+        "Left arrow"
+      else
+        "A button8"
     end
   end
 end
