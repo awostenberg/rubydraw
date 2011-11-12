@@ -63,7 +63,6 @@ module Rubydraw
     # Provides methods used in both Rubydraw::Events::KeyPressed and
     # Rubydraw::Events::KeyReleased. No instances of this class should be created,
     # but instances of subclasses are fine.
-
     class KeyboardEvent < Event
       def self.from_sdl_event(sdl_event)
         self.new(sdl_event.keysym.sym)
@@ -97,6 +96,20 @@ module Rubydraw
     class KeyReleased < KeyboardEvent
       def self.matching_sdl_event
         SDL::KEYUP
+      end
+    end
+
+    # Provides methods used in Rubydraw::Events::MousePressed and Rubydraw::Events::MouseReleased.
+    # No instances of this class should be created, but instances of subclasses are find.
+    class MouseButtonEvent
+      def from_sdl_event(sdl_event)
+        self.new(Point[sdl_event.x, sdl_event.y], sdl_events.button)
+      end
+
+      attr_reader(:position, :button)
+
+      def initialize(position, button)
+        @position, @button = position, button
       end
     end
 
@@ -170,7 +183,7 @@ module Rubydraw
     end
 
     # Created when the user attempts to close the window.
-    class Quit < Event
+    class QuitRequest < Event
       def self.matching_sdl_event
         SDL::QUIT
       end

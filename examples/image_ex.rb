@@ -7,48 +7,19 @@ class MyWindow < Rubydraw::Window
     super(width, height)
     @image = Rubydraw::Image.new(self, "media/bug.png")
     @max = 100
+
+    register_action(Rubydraw::Events::MouseMove) {|event| puts "Mouse moved! New position: #{event.position.x}, #{event.position.y}"}
+    register_action(Rubydraw::Events::QuitRequest) {close}
   end
 
-  # Draw the image inside this window, and stop after +@max+ ticks.
+  def mouse_moved(event)
+    new_position = event.position
+    puts "Mouse moved! New position: #{new_position.x}, #{new_position.y}"
+  end
+
+  # Draw the image inside this window.
   def tick
     @image.draw(Rubydraw::Point[width / 2, height / 2])
-  end
-
-  def handle_event(event)
-    case event
-      when Rubydraw::Events::UnknownEvent
-        puts "Unknown event"
-      when Rubydraw::Events::MousePressed
-        button = button_name(event.button)
-        puts "#{button} pressed."
-      when Rubydraw::Events::MouseReleased
-        button = button_name(event.button)
-        puts "#{button} released."
-      when Rubydraw::Events::MouseMove
-        puts "Mouse moved to #{event.position.x}, #{event.position.y}"
-      when Rubydraw::Events::MousePressed
-        puts "Mouse button #{event.button} pressed."
-      when Rubydraw::Events::MouseReleased
-        puts "Mouse button #{event.button} released."
-      when Rubydraw::Events::Quit
-        puts "Closing, goodbye!"
-        close
-    end
-  end
-
-  def button_name(number)
-    name = case number
-      when Rubydraw::Keys::UpArrow
-        "Up arrow"
-      when Rubydraw::Keys::DownArrow
-        "Down arrow"
-      when Rubydraw::Keys::RightArrow
-        "Right arrow"
-      when Rubydraw::Keys::LeftArrow
-        "Left arrow"
-      else
-        "A button8"
-    end
   end
 end
 

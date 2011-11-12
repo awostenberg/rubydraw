@@ -17,6 +17,8 @@ module Rubydraw
       @open = false
 
       @event_queue = EventQueue.new
+
+      @registered_actions = {}
     end
 
     # Call this method to start updating and drawing.
@@ -47,11 +49,14 @@ module Rubydraw
       SDL.QuitSubSystem(SDL::INIT_VIDEO)
     end
 
-    # Collect and handle new events (via Rubydraw::Window#handle_event) that have
-    # appeared since the last tick.
+    # Collect and handle new events by executing blocks in +@regestered_events+. See
+    # Rubydraw::Window#register_action on how to use it.
     def handle_events
       events = @event_queue.get_events
-      events.each {|event| handle_event(event)}
+
+      events.each {|event|
+        block = @registered_actions[event.class]
+        block.call(event) unless block.nil?}
     end
 
     # Redefine this in a subclass to use custom event handling. Does nothing by
@@ -92,6 +97,24 @@ module Rubydraw
     # Return the height of this window.
     def height
       @height
+    end
+
+    # Send +selector+ to +reciever+ when +event+ happens, and include the specific event
+    # instace as a parameter if send_params = true.
+
+    # Execute the given block on the appearance of an instance of +event+.
+    #
+    # Example:
+    #    class MyWindow < Rubydraw::Window
+    #      def initialize
+    #        super(300, 300)
+    #
+    #        register_action(Rubydraw::Events::MouseMove) {|event| new_pos = event.position; puts "Mouse moved to #{new_pos.x}, #{new_pos.y}"}
+    #        register_action(Rubydraw::Events::QuitRequest) {puts "Goodbye!"; close}
+    #      end
+    #    end
+    def register_action(event, &block)
+      @registered_actions[event] = block
     end
   end
 end
