@@ -114,7 +114,7 @@ module Rubydraw
     #        register_action(Rubydraw::Events::QuitRequest) {puts "Goodbye!"; close}
     #      end
     #    end
-    def register_action(event, &block)
+    def whenever(event, &block)
       @registered_actions[event] = block
     end
   end

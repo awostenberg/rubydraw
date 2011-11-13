@@ -20,10 +20,12 @@ module Rubydraw
     # Translate the given SDL event to its corresponding Rubydraw event, by asking
     # each event class if it matches the SDL event. No case statements here.
     def self.match(sdl_event)
-      sdl_event_type = sdl_event.type
       event_classes = Event.all_subclasses.compact
       rubydraw_event = UnknownEvent.new
-      event_classes.each { |event| rubydraw_event = event.from_sdl_event(sdl_event) if event.matches?(sdl_event_type) }
+      # Remove all the classes that don't want to be included in the search
+      event_classes.delete_if {|event_class| not event_class.wants_to_match?}
+      event_classes.each {|event_class| rubydraw_event = event_class.from_sdl_event(sdl_event) if event_class.matches?(sdl_event)}
+      #puts rubydraw_event.class
       rubydraw_event
     end
 
@@ -31,6 +33,11 @@ module Rubydraw
     # won't be recognized as an event and therefore will *not* participate in event
     # matching.
     class Event
+      # Include the class for searching by default.
+      def self.wants_to_match?
+        true
+      end
+
       # Just creates a new instance of this class by default. Override this if the subclass
       # requires parameters in +initialize,+ like Rubydraw::Events::MouseDown::from_sdl_event.
       def self.from_sdl_event(sdl_event)
@@ -40,7 +47,7 @@ module Rubydraw
       # Returns true if this is the overlaying class for the given SDL event. Override this
       # for custom matching.
       def self.matches?(sdl_event)
-        sdl_event == matching_sdl_event
+        sdl_event.type == matching_sdl_type
       end
 
       # Returns true for all event objects. Also see Object#event?
@@ -50,7 +57,7 @@ module Rubydraw
 
       # Returns the matching SDL event, override this in subclasses. Returns nil by
       # default.
-      def self.matching_sdl_event
+      def self.matching_sdl_type
         nil
       end
     end
@@ -64,6 +71,10 @@ module Rubydraw
     # Rubydraw::Events::KeyReleased. No instances of this class should be created,
     # but instances of subclasses are fine.
     class KeyboardEvent < Event
+      def self.wants_to_match?
+        false
+      end
+
       def self.from_sdl_event(sdl_event)
         self.new(sdl_event.keysym.sym)
       end
@@ -84,7 +95,11 @@ module Rubydraw
     # @key::  An integer specifying the key, which can be matched with a Rubydraw
     #         button constants.
     class KeyPressed < KeyboardEvent
-      def self.matching_sdl_event
+      def self.wants_to_match?
+        true
+      end
+
+      def self.matching_sdl_type
         SDL::KEYDOWN
       end
     end
@@ -94,7 +109,11 @@ module Rubydraw
     # @key::  An integer specifying the key, which can be matched with a Rubydraw
     #         button constants.
     class KeyReleased < KeyboardEvent
-      def self.matching_sdl_event
+      def self.wants_to_match?
+        true
+      end
+
+      def self.matching_sdl_type
         SDL::KEYUP
       end
     end
@@ -120,7 +139,7 @@ module Rubydraw
         self.new(Point[sdl_event.x, sdl_event.y], sdl_event.button)
       end
 
-      def self.matching_sdl_event
+      def self.matching_sdl_type
         SDL::MOUSEBUTTONDOWN
       end
 
@@ -140,7 +159,7 @@ module Rubydraw
         self.new(Point[sdl_event.x, sdl_event.y], sdl_event.button)
       end
 
-      def self.matching_sdl_event
+      def self.matching_sdl_type
         SDL::MOUSEBUTTONUP
       end
 
@@ -159,7 +178,7 @@ module Rubydraw
         self.new(Point[sdl_event.x, sdl_event.y], Point[sdl_event.xrel, sdl_event.yrel])
       end
 
-      def self.matching_sdl_event
+      def self.matching_sdl_type
         SDL::MOUSEMOTION
       end
 
@@ -169,22 +188,62 @@ module Rubydraw
       #
       # +x+ and +y+:                     The new position of the cursor.
       #
-      # +relative_x+ and +relative_y+:  The relative movement of the cursor since the last tick.
+      # +relative_x+ and +relative_y+:  The relative movement of the cursor since the lasttick.
       def initialize(position, relative_position)
         @position, @relative_position = position, relative_position
       end
     end
 
-    # Created either when the window gains or loses focus.
-    class WindowFocus
-      def from_sdl_event(sdl_event)
-        self.new(sdl_event.gain)
+    # Created either when the window gains or loses focus. This is the parent class for
+    # Rubydraw::Events::FocusGain and Rubydraw::Events::FocusLose.
+    class FocusEvent < Event
+      def self.wants_to_match?
+        false
+      end
+
+      def self.matching_sdl_type
+        SDL::ACTIVEEVENT
+      end
+    end
+
+    # Created when the window gains focus.
+    class FocusGain < FocusEvent
+      def self.wants_to_match?
+        true
+      end
+
+      # Redefine Event#matches? because both this class and Rubydraw::Events::FocusLoss use
+      # SDL::ActiveEvent.
+      def self.matches?(sdl_event)
+        result = false
+        if super(sdl_event)
+          result = sdl_event.gain == 1
+        end
+        result
+      end
+    end
+
+    # Created when the window loses focus.
+    class FocusLoss < FocusEvent
+      def self.wants_to_match?
+        true
+      end
+
+      # Redefine Event#matches? because both this class and Rubydraw::Events::FocuGain use
+      # SDL::ActiveEvent
+      def self.matches?(sdl_event)
+        result = false
+        if super(sdl_event)
+          result = sdl_event.gain == 0
+        end
+        result
       end
     end
 
     # Created when the user attempts to close the window.
     class QuitRequest < Event
-      def self.matching_sdl_event
+
+      def self.matching_sdl_type
         SDL::QUIT
       end
     end

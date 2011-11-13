@@ -17,8 +17,6 @@ module Rubydraw
         # exist.
         raise Rubydraw::SDLError "Failed to load image from: '#{full_path}'"
       end
-      puts @sdl_image.class
-      puts @sdl_image.pointer.class
     end
 
     # Blit (copy) into the window at +position+ (see point.rb).

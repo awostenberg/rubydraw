@@ -6,10 +6,13 @@ class MyWindow < Rubydraw::Window
   def initialize(width, height)
     super(width, height)
     @image = Rubydraw::Image.new("media/bug.png")
-    @max = 100
-
-    register_action(Rubydraw::Events::MouseMove) {|event| @mouse_position = event.position}
-    register_action(Rubydraw::Events::QuitRequest) {close}
+    @focused = true
+    whenever Rubydraw::Events::QuitRequest do
+      close
+    end
+    whenever Rubydraw::Events::MouseMove do |event|
+      @mouse_position = event.position
+    end
   end
 
   def mouse_moved(event)
@@ -17,9 +20,8 @@ class MyWindow < Rubydraw::Window
     puts "Mouse moved! New position: #{new_position.x}, #{new_position.y}"
   end
 
-  # Draw the image inside this window.
   def tick
-    @image.draw(self, @mouse_position)
+    @image.draw(self, @mouse_position) #if @focused
   end
 end
 
