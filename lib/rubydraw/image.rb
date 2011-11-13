@@ -7,11 +7,7 @@ module Rubydraw
   class Image
     # Create a new image in the given window and load the image from
     # +path.+
-    def initialize(window, path)
-      @window = window
-      unless window.is_a?(Rubydraw::Window)
-        raise Rubydraw::SDLError "Window cannot be nil"
-      end
+    def initialize(path)
       # In case program is being run from a different directory,
       # provide the _full_ path. Nothing relative here.
       full_path = File.expand_path path
@@ -21,6 +17,8 @@ module Rubydraw
         # exist.
         raise Rubydraw::SDLError "Failed to load image from: '#{full_path}'"
       end
+      puts @sdl_image.class
+      puts @sdl_image.pointer.class
     end
 
     # Blit (copy) into the window at +position+ (see point.rb).
@@ -28,10 +26,10 @@ module Rubydraw
     #
     # Notice that you don't blit surfaces to other surfaces when using
     # Rubygame, but instead you draw things.
-    def draw(position)
+    def draw(window, position)
       source_rect = SDL::Rect.new([0, 0, width, height])
-      blit_rect = SDL::Rect.new([position.x, position.y, @window.width, @window.height])
-      SDL::BlitSurface(@sdl_image, source_rect, @window.sdl_surface, blit_rect)
+      blit_rect = SDL::Rect.new([position.x, position.y, window.width, window.height])
+      SDL::BlitSurface(@sdl_image, source_rect, window.sdl_surface, blit_rect)
     end
 
     # Returns the image width

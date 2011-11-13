@@ -29,6 +29,8 @@ module Rubydraw
       loop do
         handle_events
         if @open
+          # Clear the contents of the window
+          clear
           tick
           # Update the screen to show any changes.
           SDL::UpdateRect(@screen, 0, 0, 0, 0)
@@ -36,9 +38,13 @@ module Rubydraw
           # This is where the loop is broken after Rubydraw::Window#close is called.
           break
         end
-          # Pause for a bit, so it's not such a tight loop.
-        sleep 0.1
       end
+    end
+
+    # Clear the window's contents by filling it with black. A bit of a cheat; I don't
+    # know if there is a better way to do this.
+    def clear
+      SDL::FillRect(@screen, nil, 0)
     end
 
     # Call this method to tell SDL to quit drawing. The loop (started in
@@ -57,11 +63,6 @@ module Rubydraw
       events.each {|event|
         block = @registered_actions[event.class]
         block.call(event) unless block.nil?}
-    end
-
-    # Redefine this in a subclass to use custom event handling. Does nothing by
-    # default.
-    def handle_event(event)
     end
 
     # This causes the main loop to exit. Use Rubydraw::Window#close to close the

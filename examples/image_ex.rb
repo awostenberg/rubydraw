@@ -5,10 +5,10 @@ class MyWindow < Rubydraw::Window
   # Create a new window with an bug image inside it
   def initialize(width, height)
     super(width, height)
-    @image = Rubydraw::Image.new(self, "media/bug.png")
+    @image = Rubydraw::Image.new("media/bug.png")
     @max = 100
 
-    register_action(Rubydraw::Events::MouseMove) {|event| puts "Mouse moved! New position: #{event.position.x}, #{event.position.y}"}
+    register_action(Rubydraw::Events::MouseMove) {|event| @mouse_position = event.position}
     register_action(Rubydraw::Events::QuitRequest) {close}
   end
 
@@ -19,7 +19,7 @@ class MyWindow < Rubydraw::Window
 
   # Draw the image inside this window.
   def tick
-    @image.draw(Rubydraw::Point[width / 2, height / 2])
+    @image.draw(self, @mouse_position)
   end
 end
 
