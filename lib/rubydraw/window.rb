@@ -3,7 +3,7 @@ module Rubydraw
   # Note: there can only be one window on the screen at a time; it is a limit
   # of SDL. One important things about instances of Rubydraw::Window: its main loop
   # (which starts when Rubydraw::Window#open is called) is *not* forked! It will break
-  # when Rubydraw::Window#close is called (as soon as I get around to implementing this).
+  # when Rubydraw::Window#close is called.
   class Window
     # Create a new window.
     def initialize(width, height)

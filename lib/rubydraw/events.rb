@@ -25,7 +25,6 @@ module Rubydraw
       # Remove all the classes that don't want to be included in the search
       event_classes.delete_if {|event_class| not event_class.wants_to_match?}
       event_classes.each {|event_class| rubydraw_event = event_class.from_sdl_event(sdl_event) if event_class.matches?(sdl_event)}
-      #puts rubydraw_event.class
       rubydraw_event
     end
 

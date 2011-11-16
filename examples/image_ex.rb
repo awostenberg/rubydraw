@@ -3,10 +3,9 @@ require 'rubydraw'
 
 class MyWindow < Rubydraw::Window
   # Create a new window with an bug image inside it
-  def initialize(width, height)
-    super(width, height)
+  def initialize
+    super(300, 300)
     @image = Rubydraw::Image.new("media/bug.png")
-    @focused = true
     whenever Rubydraw::Events::QuitRequest do
       close
     end
@@ -25,5 +24,5 @@ class MyWindow < Rubydraw::Window
   end
 end
 
-w = MyWindow.new(300, 300)
+w = MyWindow.new
 w.open
