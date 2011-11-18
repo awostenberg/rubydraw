@@ -1,5 +1,8 @@
 Rubydraw is a high level game/graphics library, like Gosu or Rubygame, and is written in Ruby.
-Its only dependency is ruby-sdl-ffi, which it uses to access SDL functions.
+Its only dependency is ruby-sdl-ffi, which it uses to access SDL functions. Also, thanks,
+Rubygame, for documenting your code (which, completely by coninsidence, also uses ruby-sdl-ffi),
+otherwise I wouldn't have the slightest idea on how to use the base library's undocumented code!
+You have been very helpful. :)
 –––––
 NOTE: I can't get +ruby-sdl-ffi+ (the library Rubydraw uses to access SDL) to work with +Ruby
 1.9.2+, so I don't know if it even does. If it does work, and/or you know how to make it work,
@@ -7,7 +10,7 @@ I would appreciate it if you notify me. So basically, I can't test anything with
 for the inconvenience!
 
 HOW TO INSTALL
-To install this library which isn't on Rubygems.org YET, navigate to this directory in the command
+To install this library without RubyGems, navigate to this directory in the command
 line tool and give "rubydraw/build_and_install" permissions to run. Then simply run it. Hooray, it
 should be working now! Test it in irb with "require 'rubydraw'".
 

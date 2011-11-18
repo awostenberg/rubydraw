@@ -15,7 +15,7 @@ module Rubydraw
       if @sdl_image.pointer.null?
         # SDL couln't load the image; usually happens because it doesn't
         # exist.
-        raise Rubydraw::SDLError "Failed to load image from: '#{full_path}'"
+        raise Rubydraw::SDLError "Failed to load image: #{SDL.GetError}"
       end
     end
 
@@ -28,6 +28,7 @@ module Rubydraw
       source_rect = SDL::Rect.new([0, 0, width, height])
       blit_rect = SDL::Rect.new([position.x, position.y, window.width, window.height])
       SDL::BlitSurface(@sdl_image, source_rect, window.sdl_surface, blit_rect)
+      self
     end
 
     # Returns the image width
@@ -38,12 +39,6 @@ module Rubydraw
     # Returns the image height
     def height
       @sdl_image.h
-    end
-
-    # Returns the SDL image that was created in Image#initialize.
-    # Rubydraw::Window uses this to draw this Image instance.
-    def sdl_image
-      @sdl_image
     end
   end
 end

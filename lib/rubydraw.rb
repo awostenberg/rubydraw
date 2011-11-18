@@ -14,7 +14,10 @@ files = %w[
 files.each {|f| require("rubydraw/" + f)}
 
 # Rubydraw is a high level game/graphics library, like Gosu or Rubygame, and is written completely
-# in Ruby. Its only dependency is ruby-sdl-ffi, which it uses to access SDL functions.
+# in Ruby. Its only dependency is ruby-sdl-ffi, which it uses to access SDL functions. Also, thanks,
+# Rubygame, for documenting your code (which, completely by coninsidence, also uses ruby-sdl-ffi),
+# otherwise I wouldn't have the slightest idea on how to use the base library's undocumented code!
+# You have been very helpful. :)
 #
 # NOTE: I can't get +ruby-sdl-ffi+ (the library Rubydraw uses to access SDL) to work with +Ruby
 # 1.9.2,+ so I don't know if it even does. If it does work, and/or you know how to make it work,

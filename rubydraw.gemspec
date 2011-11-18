@@ -29,7 +29,8 @@ SPEC = Gem::Specification.new do |spec|
     examples/image_ex.rb
     examples/sound_ex.rb
     examples/media/bug.png
-    examples/media/hooray.ogg]
+    examples/media/hooray.ogg
+    examples/media/noise.ogg]
   spec.files          = ["README", lib_files, example_files].flatten
   spec.add_dependency("ruby-sdl-ffi", ">= 0.4")
 end
