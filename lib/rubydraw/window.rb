@@ -6,7 +6,7 @@ module Rubydraw
   # when Rubydraw::Window#close is called.
   class Window
     # Create a new window.
-    def initialize(width, height)
+    def initialize(width, height, bkg_color=Color::Black)
       unless height.is_a?(Numeric) and width.is_a?(Numeric)
         # Raise an error
         raise SDLError "Window width and height have to be a number."
@@ -19,10 +19,12 @@ module Rubydraw
       @event_queue = EventQueue.new
 
       @registered_actions = {}
+
+      @bkg_color = bkg_color
     end
 
     # Call this method to start updating and drawing.
-    def open
+    def show
       @open = true
       # Behold, the main loop. Drumroll!
       @screen = SDL::SetVideoMode(@width, @height, 0, 0)
@@ -44,7 +46,13 @@ module Rubydraw
     # Clear the window's contents by filling it with black. A bit of a cheat; I don't
     # know if there is a better way to do this.
     def clear
-      SDL::FillRect(@screen, nil, 0)
+      fill_with(@bkg_color)
+    end
+
+    # Fill the entire window with a Rubydraw::Color. Do this by feeding SDL the numeric
+    # verion of the color; see Rubydraw::Color#to_i
+    def fill_with(color)
+      SDL::FillRect(@screen, nil, color.to_i)
     end
 
     # Call this method to tell SDL to quit drawing. The loop (started in
@@ -54,6 +62,8 @@ module Rubydraw
       break_main_loop
       SDL.QuitSubSystem(SDL::INIT_VIDEO)
     end
+
+    alias quit close
 
     # Collect and handle new events by executing blocks in +@regestered_events+. See
     # Rubydraw::Window#register_action on how to use it.

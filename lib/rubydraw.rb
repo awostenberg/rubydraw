@@ -10,8 +10,10 @@ files = %w[
   event_queue
   keys
   point
+  color
   sdl_error]
 files.each {|f| require("rubydraw/" + f)}
+require 'ext/string'
 
 # Rubydraw is a high level game/graphics library, like Gosu or Rubygame, and is written completely
 # in Ruby. Its only dependency is ruby-sdl-ffi, which it uses to access SDL functions. Also, thanks,
