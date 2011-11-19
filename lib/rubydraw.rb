@@ -11,7 +11,8 @@ files = %w[
   keys
   point
   color
-  sdl_error]
+  sdl_error
+  rectangle]
 files.each {|f| require("rubydraw/" + f)}
 require 'ext/string'
 
