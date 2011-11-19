@@ -5,6 +5,11 @@ module Rubydraw
   class Rectangle
     attr_reader(:position, :width, :height)
 
+    # Shorthand new method
+    def self.[](width, height, position)
+      self.new(width, height, position)
+    end
+
     # Create a new rectangle with the given dimensions and position.
     def initialize(width, height, position)
       @width, @height, @position = width, height, position
@@ -28,9 +33,14 @@ module Rubydraw
       Point[x + @width, y + @height]
     end
 
-    # Returns if the given point is inside this rectangle. See Rubydraw::Point::inside?
+    # Returns if the given point is inside this rectangle. See Rubydraw::Point#inside?
     def contains?(point)
       point.inside?(top_left, bottom_right)
+    end
+
+    # Returns an SDL::Rectangle equal to this one.
+    def to_sdl
+      SDL::Rect.new([x, y, width, height])
     end
   end
 end

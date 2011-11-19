@@ -5,6 +5,8 @@ module Rubydraw
   # (which starts when Rubydraw::Window#open is called) is *not* forked! It will break
   # when Rubydraw::Window#close is called.
   class Window
+    attr_reader(:width, :height)
+
     # Create a new window.
     def initialize(width, height, bkg_color=Color::Black)
       unless height.is_a?(Numeric) and width.is_a?(Numeric)
@@ -100,28 +102,21 @@ module Rubydraw
     def tick
     end
 
-    # Return the width of this window.
-    def width
-      @width
-    end
-
-    # Return the height of this window.
-    def height
-      @height
-    end
-
-    # Send +selector+ to +reciever+ when +event+ happens, and include the specific event
-    # instace as a parameter if send_params = true.
-
-    # Execute the given block on the appearance of an instance of +event+.
+    # Execute the given block on the appearance of an instance of +event+ and pass that
+    # instance to the block.
     #
     # Example:
     #    class MyWindow < Rubydraw::Window
     #      def initialize
     #        super(300, 300)
-    #
-    #        register_action(Rubydraw::Events::MouseMove) {|event| new_pos = event.position; puts "Mouse moved to #{new_pos.x}, #{new_pos.y}"}
-    #        register_action(Rubydraw::Events::QuitRequest) {puts "Goodbye!"; close}
+    #        whenever(Rubydraw::Events::QuitRequest) do
+    #          puts "Goodbye!"
+    #          close
+    #        end
+    #        whenever(Rubydraw::Events::MouseMove) do |event|
+    #          new_pos = event.position
+    #          puts "Mouse moved to #{new_pos.x}, #{new_pos.y}.}"
+    #        end
     #      end
     #    end
     def whenever(event, &block)

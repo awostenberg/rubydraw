@@ -1,11 +1,15 @@
 # The only dependency
 require 'ruby-sdl-ffi'
 
+# The extention must be loaded first.
+require 'ext/string'
+
 # Require all the rubydraw files
 files = %w[
   window
   image
   sound
+  text
   events
   event_queue
   keys
@@ -14,7 +18,6 @@ files = %w[
   sdl_error
   rectangle]
 files.each {|f| require("rubydraw/" + f)}
-require 'ext/string'
 
 # Rubydraw is a high level game/graphics library, like Gosu or Rubygame, and is written completely
 # in Ruby. Its only dependency is ruby-sdl-ffi, which it uses to access SDL functions. Also, thanks,
@@ -30,7 +33,11 @@ module Rubydraw
   # Initialize SDL.
   def self.initialize_sdl
     if SDL::Init(SDL::INIT_EVERYTHING) != 0
-      raise DrawError "Could not initialize SDL"
+      raise SDLError "Failed to initialize SDL: #{SDL.GetError}"
+    end
+    # Initialize fonts.
+    if (SDL::TTF.WasInit == 0 and not SDL::TTF.Init == 0)
+      raise SDLError "Failed to initialize SDL TTF: #{SDL.GetError}"
     end
   end
 end

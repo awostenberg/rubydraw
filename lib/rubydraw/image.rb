@@ -25,9 +25,11 @@ module Rubydraw
     # Notice that you don't blit surfaces to other surfaces when using
     # Rubygame, but instead you draw things.
     def draw(window, position)
-      source_rect = SDL::Rect.new([0, 0, width, height])
-      blit_rect = SDL::Rect.new([position.x, position.y, window.width, window.height])
-      SDL::BlitSurface(@sdl_image, source_rect, window.sdl_surface, blit_rect)
+      #source_rect = Rectangle[Point[0, 0], width, height]
+      #blit_rect = Rectangle[position, window.width, window.height]
+      source_rect = Rectangle[width, height, Point[0, 0]]
+      blit_rect = Rectangle[window.width, window.height, position]
+      SDL::BlitSurface(@sdl_image, source_rect.to_sdl, window.sdl_surface, blit_rect.to_sdl)
       self
     end
 
