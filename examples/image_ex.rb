@@ -24,5 +24,4 @@ class MyWindow < Rubydraw::Window
   end
 end
 
-w = MyWindow.new
-w.open
+w = MyWindow.new.show

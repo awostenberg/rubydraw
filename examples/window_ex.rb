@@ -19,7 +19,7 @@ w = gets.to_i
 print "Window width: "
 h = gets.to_i
 
-window = MyWindow.new(w, h).open
+window = MyWindow.new(w, h).show
 
 # Wait for a while to let the user enjoy the window
 sleep 10

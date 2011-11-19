@@ -18,4 +18,4 @@ class MyWindow < Rubydraw::Window
   end
 end
 
-MyWindow.new.open
+MyWindow.new.show

@@ -32,7 +32,7 @@ module Rubydraw
       # Construct a hex string using the previously determined hex colors.
       # *Note:* it appears that SDL's (or maybe ruby-sdl-ffi's) color
       # is backwards. The order appears to be: +BBGGRRAA+
-      color_str = hex_blue + hex_red + hex_green + hex_alpha
+      color_str = hex_blue + hex_green + hex_red + hex_alpha
       color_str.to_i(16)
     end
 
