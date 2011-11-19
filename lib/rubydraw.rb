@@ -18,7 +18,7 @@ files = %w[
   color
   sdl_error
   rectangle]
-files.each {|f| require("rubydraw/" + f)}
+files.each { |f| require("rubydraw/" + f) }
 
 # Rubydraw is a high level game/graphics library, like Gosu or Rubygame, and is written completely
 # in Ruby. Its only dependency is ruby-sdl-ffi, which it uses to access SDL functions. Also, thanks,
@@ -41,6 +41,38 @@ module Rubydraw
       raise SDLError "Failed to initialize SDL TTF: #{SDL.GetError}"
     end
   end
+
+  # Enable/disable key repeating. After this method is called, instances of Rubydraw::Events::KeyPressed
+  # wil be continually created, until the key is released.
+  #
+  # Couldn't get SDL.EnableKeyRepeat to work, so I implemented my own for the time being. This _should_
+  # be temporary, but no guarentees...
+  def self.set_key_repeat(new)
+    unless new.is_a?(TrueClass) or new.is_a?(FalseClass)
+      raise ArgumentError, "'new' must be boolean"
+    end
+    @@key_repeat = new
+  end
+
+  # See Rubydraw.set_key_repeat.
+  def self.enable_key_repeat
+    set_key_repeat(true)
+  end
+
+  # See Rubydraw.set_key_repeat.
+  def self.disable_key_repeat
+    set_key_repeat(false)
+  end
+
+  # Return if +key_repeat+ is enabled or not.
+  def self.key_repeat
+    @@key_repeat
+  end
 end
 
-Rubydraw::initialize_sdl
+Rubydraw.enable_key_repeat
+
+Rubydraw.initialize_sdl
+
+# Make sure to quit SDL systems when the program terminates.
+at_exit {SDL.Quit}
