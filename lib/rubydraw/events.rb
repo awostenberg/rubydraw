@@ -191,6 +191,16 @@ module Rubydraw
       def initialize(position, relative_position)
         @position, @relative_position = position, relative_position
       end
+
+      # Returns the new x positon of the mouse.
+      def x
+        @position.x
+      end
+
+      # Returns the new y mouse positon.
+      def y
+        @position.y
+      end
     end
 
     # Created either when the window gains or loses focus. This is the parent class for
