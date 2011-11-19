@@ -3,6 +3,7 @@ require 'ruby-sdl-ffi'
 
 # The extention must be loaded first.
 require 'ext/string'
+require 'ext/object'
 
 # Require all the rubydraw files
 files = %w[

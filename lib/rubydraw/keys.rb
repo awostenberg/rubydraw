@@ -17,7 +17,7 @@ module Rubydraw
   #             @x -= 1
   #         end
   #   end
-  module Keys
+  module Key
     UpArrow         = SDL::K_UP
     DownArrow       = SDL::K_DOWN
     RightArrow      = SDL::K_RIGHT

@@ -72,9 +72,14 @@ module Rubydraw
     def handle_events
       events = @event_queue.get_events
 
+      #events.each {|event|
+      #  block = @registered_actions[event.class]
+      #  block.call(event) unless block.nil?}
       events.each {|event|
-        block = @registered_actions[event.class]
-        block.call(event) unless block.nil?}
+        blocks = @registered_actions[event.class]
+        unless blocks.nil?
+          blocks.each {|b| b.call(event) unless b.nil?}
+        end}
     end
 
     # This causes the main loop to exit. Use Rubydraw::Window#close to close the
@@ -119,8 +124,18 @@ module Rubydraw
     #        end
     #      end
     #    end
-    def whenever(event, &block)
-      @registered_actions[event] = block
+    def old_whenever(event, &block)
+      event_block = @registered_actions[event]
+      # If nobody has registered a block for this event, prepare the way.
+      if event_block.nil?
+        @registered_actions[event] = []
+      end
+      # Now add the block.
+      @registered_actions[event] << block
+    end
+
+    def registered_actions
+      @registered_actions
     end
   end
 end
