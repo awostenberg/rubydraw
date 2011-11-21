@@ -26,8 +26,8 @@ module Rubydraw
     def draw(window, position)
       sdl_color = @color.to_sdl
       sdl_surface = SDL::TTF.RenderText_Blended(@drawable, @contents, sdl_color)
-      source_rect = Rectangle[sdl_surface.w, sdl_surface.h, Point[0, 0]]
-      blit_rect = Rectangle[window.width, window.height, position]
+      source_rect = Rectangle[Point[sdl_surface.w, sdl_surface.h], Point[0, 0]]
+      blit_rect = Rectangle[Point[window.width, window.height], position]
       SDL::BlitSurface(sdl_surface, source_rect.to_sdl, window.sdl_surface, blit_rect.to_sdl)
     end
   end

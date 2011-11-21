@@ -31,6 +31,9 @@ files.each { |f| require("rubydraw/" + f) }
 # I would appreciate it if you notify me. So basically, I can't test anything with +1.9.2+. Sorry
 # for the inconvenience!
 module Rubydraw
+  # Basically just an alias to Rubydraw::Rectangle.
+  Rect = Rectangle
+
   # Initialize SDL.
   def self.initialize_sdl
     if SDL::Init(SDL::INIT_EVERYTHING) != 0

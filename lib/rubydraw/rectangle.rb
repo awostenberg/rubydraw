@@ -3,16 +3,16 @@ module Rubydraw
   # falls inside it. One good use for this class would be a button (will be implemented
   # in a future version, probably soon)
   class Rectangle
-    attr_reader(:position, :width, :height)
+    attr_reader(:dimensions, :position)
 
     # Shorthand new method
-    def self.[](width, height, position)
-      self.new(width, height, position)
+    def self.[](dimensions, position)
+      self.new(dimensions, position)
     end
 
     # Create a new rectangle with the given dimensions and position.
-    def initialize(width, height, position)
-      @width, @height, @position = width, height, position
+    def initialize(dimensions, position)
+      @dimensions, @position = dimensions, position
     end
 
     # Returns the x position for the rectangle
@@ -41,6 +41,16 @@ module Rubydraw
     # Returns an SDL::Rectangle equal to this one.
     def to_sdl
       SDL::Rect.new([x, y, width, height])
+    end
+
+    # Returns this rectangle's width.
+    def width
+      @dimensions.x
+    end
+
+    # Returns this rectangle's height.
+    def height
+      @dimensions.y
     end
   end
 end
