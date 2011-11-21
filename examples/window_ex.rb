@@ -5,10 +5,7 @@ class MyWindow < Rubydraw::Window
   def initialize(width, height)
     super(width, height)
     puts "New window created with width: #{@width} and height #{@height}"
-  end
-  def handle_event(event)
-    case event
-    when Rubydraw::Event::Quit
+    whenever Rubydraw::Events::QuitRequest do
       close
     end
   end
@@ -20,6 +17,3 @@ print "Window width: "
 h = gets.to_i
 
 window = MyWindow.new(w, h).show
-
-# Wait for a while to let the user enjoy the window
-sleep 10
