@@ -32,5 +32,14 @@ module Rubydraw
     def +(other)
       Point[self.x + other.x, self.y + other.y]
     end
+
+    # Two points are equal if both their x and y positions are the same.
+    def ==(other)
+      result = if other.is_a?(Point)
+        @x == other.x and @y == other.y
+      else
+        false
+      end
+    end
   end
 end

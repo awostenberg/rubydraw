@@ -1,7 +1,7 @@
 # The only dependency
 require 'ruby-sdl-ffi'
 
-# The extention must be loaded first.
+# The extentions must be loaded first, except for +aliases.rb+
 require 'ext/string'
 require 'ext/object'
 
@@ -19,6 +19,10 @@ files = %w[
   sdl_error
   rectangle]
 files.each { |f| require("rubydraw/" + f) }
+
+# This must be loaded last, because it sets up constants that "point" to Rubydraw classes, hence
+# the name "aliases".
+require 'ext/aliases'
 
 # Rubydraw is a high level game/graphics library, like Gosu or Rubygame, and is written completely
 # in Ruby. Its only dependency is ruby-sdl-ffi, which it uses to access SDL functions. Also, thanks,
