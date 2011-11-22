@@ -13,22 +13,21 @@ module Rubydraw
 
     # Create a new point with the given +x+ and +y+ positions.
     def initialize(x, y)
-      unless x.is_a?(Numeric) and y.is_a?(Numeric)
-        raise RuntimeError "New Point x and y must be a number."
-      end
       @x, @y = x, y
     end
 
     # Returns if this self falls within the given rectangle.
-    def inside?(min, max)
+    def inside?(rect)
+      min = rect.top_left
+      max = rect.bottom_right
       (x.between?(min.x, max.x)) and (y.between?(min.y, max.y))
     end
 
     # Add this point's x and y positions to other's x and y positions.
     #
     # Example:
-    #   # This produces #<Rubydraw::Point:0x1010f1958 @y=10, @x=60>
-    #   Rubydraw::Point[10, 20] + Rubydraw::Point[50, -10]
+    #   Point[10, 20] + Point[50, -10]
+    #   => #<Rubydraw::Point:0x1010f1958 @y=10, @x=60>
     def +(other)
       Point[self.x + other.x, self.y + other.y]
     end

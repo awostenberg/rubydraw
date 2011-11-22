@@ -6,15 +6,21 @@ module Rubydraw
     attr_reader(:dimensions, :position)
 
     # Shorthand new method
-    def self.[](dimensions, position)
-      self.new(dimensions, position)
+    def self.[](position, dimensions)
+      self.new(position, dimensions)
     end
 
     # Create a new rectangle with the given dimensions and position.
-    def initialize(dimensions, position)
-      raise ArgumentError, "Rectangle dimensions must be a Point" unless dimensions.is_a?(Rubydraw::Point)
-      raise ArgumentError, "Rectangle position must be a Point" unless position.is_a?(Rubydraw::Point)
-      @dimensions, @position = dimensions, position
+    def initialize(position, dimensions)
+      #raise ArgumentError, "Rectangle dimensions must be a Point" unless dimensions.is_a?(Rubydraw::Point)
+      #raise ArgumentError, "Rectangle position must be a Point" unless position.is_a?(Rubydraw::Point)
+      unless position.respond_to?(:x) and position.respond_to?(:y)
+        raise ArgumentError, "Expected a Point, got #{position}"
+      end
+      unless dimensions.respond_to?(:x) and dimensions.respond_to?(:y)
+        raise ArgumentError, "Expected a Point, got #{position}"
+      end
+      @position, @dimensions = position, dimensions
     end
 
     # Returns the x position for the rectangle
@@ -42,7 +48,7 @@ module Rubydraw
 
     # Returns the position at the bottom right
     def bottom_right
-      Point[x + width, y + height]
+      @position + @dimensions
     end
 
     # Returns if the given point is inside this rectangle. See Rubydraw::Point#inside?
