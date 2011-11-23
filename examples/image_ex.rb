@@ -12,6 +12,12 @@ class MyWindow < Rubydraw::Window
     whenever Rubydraw::Events::MouseMove do |event|
       @mouse_position = event.position
     end
+    whenever Rubydraw::Events::FocusGain do
+      @focused = true
+    end
+    whenever Rubydraw::Events::FocusLoss do
+      @focused = false
+    end
   end
 
   def mouse_moved(event)
@@ -20,7 +26,7 @@ class MyWindow < Rubydraw::Window
   end
 
   def tick
-    @image.draw(self, @mouse_position) #if @focused
+    @image.draw(self, @mouse_position) if @focused
   end
 end
 

@@ -53,7 +53,7 @@ module Rubydraw
 
     # Returns if the given point is inside this rectangle. See Rubydraw::Point#inside?
     def contains?(point)
-      point.inside?(top_left, bottom_right)
+      point.inside?(self)
     end
 
     # Returns an SDL::Rectangle equal to this one.
@@ -74,6 +74,12 @@ module Rubydraw
     # Returns all four corners in this Rectangle.
     def points
       [top_left, top_right, bottom_left, bottom_right]
+    end
+
+    # Returns a human-readable string, specifying this rectangle.
+    def to_s
+      d = @dimensions
+      ":Rectangle: (position: #{@position.to_s}) (dimensions: #{d.x}x#{d.y}):"
     end
   end
 end
