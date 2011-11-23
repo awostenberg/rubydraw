@@ -11,15 +11,7 @@ module Rubydraw
     end
 
     # Create a new rectangle with the given dimensions and position.
-    def initialize(position, dimensions)
-      #raise ArgumentError, "Rectangle dimensions must be a Point" unless dimensions.is_a?(Rubydraw::Point)
-      #raise ArgumentError, "Rectangle position must be a Point" unless position.is_a?(Rubydraw::Point)
-      unless position.respond_to?(:x) and position.respond_to?(:y)
-        raise ArgumentError, "Expected a Point, got #{position}"
-      end
-      unless dimensions.respond_to?(:x) and dimensions.respond_to?(:y)
-        raise ArgumentError, "Expected a Point, got #{position}"
-      end
+    def initialize(position, dimensions)``
       @position, @dimensions = position, dimensions
     end
 

@@ -81,10 +81,6 @@ module Rubydraw
       attr_reader(:key)
 
       def initialize(key)
-        unless key.is_a?(Numeric)
-          raise SDLError "Failed to create new event because key is not a number."
-        end
-
         @key = key
       end
     end
