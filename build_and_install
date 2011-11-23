@@ -1,3 +1,8 @@
 gem build rubydraw.gemspec
+<<<<<<< HEAD
 gem install rubydraw-0.2.0.3.gem
 rm rubydraw-0.2.0.3.gem
+=======
+gem install rubydraw-0.2.0.gem
+rm rubydraw-0.2.0.gem
+>>>>>>> 77fe0b5063546f75285089ea8bc223c27f371d86
