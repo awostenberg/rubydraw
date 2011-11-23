@@ -8,12 +8,7 @@ module Rubydraw
     attr_reader(:width, :height)
 
     # Create a new window.
-    def initialize(width, height, bkg_color=Color::Black)
-      unless height.is_a?(Numeric) and width.is_a?(Numeric)
-        # Raise an error
-        raise SDLError "Window width and height have to be a number."
-      end
-
+    def initialize(width, height, bkg_color=Color::Black)\
       @width = width
       @height = height
       @open = false

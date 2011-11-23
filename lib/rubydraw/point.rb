@@ -13,12 +13,6 @@ module Rubydraw
 
     # Create a new point with the given +x+ and +y+ positions.
     def initialize(x, y)
-      unless x.respond_to?(:+)
-        "Expected an integer for x, got #{x}"
-      end
-      unless y.respond_to?(:+)
-        "Expected an integer for y, got #{y}"
-      end
       @x, @y = x, y
     end
 
