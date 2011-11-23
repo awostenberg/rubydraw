@@ -28,13 +28,46 @@ module Rubydraw
     # Example:
     #   Point[10, 20] + Point[50, -10]
     #   => #<Rubydraw::Point:0x1010f1958 @y=10, @x=60>
+    # This also works:
+    #   Point[10, 20] + 5
+    #   => #<Rubydraw::Point:0x1010f1958 @y=15, @x=25>
     def +(other)
-      Point[self.x + other.x, self.y + other.y]
+      if other.is_a?(Numeric)
+        ox, oy = other, other
+      else
+        ox, oy = other.x, other.y
+      end
+      Point[self.x + ox, self.y + oy]
     end
 
     # Subtract +other+'s x and y positions from this point's x and y.
     def -(other)
-      Point[self.x - other.x, self.y - other.y]
+      if other.is_a?(Numeric)
+        ox, oy = other, other
+      else
+        ox, oy = other.x, other.y
+      end
+      Point[self.x - ox, self.y - oy]
+    end
+
+    # Same as Point#- and Point#+, but multiply instead.
+    def *(other)
+      if other.is_a?(Numeric)
+        ox, oy = other, other
+      else
+        ox, oy = other.x, other.y
+      end
+      Point[self.x * ox, self.y * oy]
+    end
+
+    # Divide.
+    def /(other)
+      if other.is_a?(Numeric)
+        ox, oy = other, other
+      else
+        ox, oy = other.x, other.y
+      end
+      Point[self.x / ox, self.y / oy]
     end
 
     # Two points are equal if both their x and y positions are the same.
@@ -46,7 +79,10 @@ module Rubydraw
       end
     end
 
-    # Returns a human readable string containing info about this point.
+    def to_a
+      [@x, @y]
+    end
+
     def to_s
       "#{@x}, #{y}"
     end

@@ -105,5 +105,76 @@ module Rubydraw
     def registered_actions
       @registered_actions
     end
+
+    # Draw a line from +start+ to +finish+. Both should be an instance of Rubydraw::Point.
+    #
+    #   start:   The point on one side of the line.
+    #   finish:  The point on the other end of the line.
+    #   color:   An instance of Rubydraw::Color; defines the color of the line.
+    #   mode:    Should be either +:aa+ or +:default+. When +:aa+, anti-aliasing is enabled, otherwise, it's not.
+    def draw_line(start, finish, color, anti_aliasing=true)
+      r, g, b, a = color.to_a
+      args = [@screen, start.x, start.y, finish.x, finish.y, r, g, b, a]
+      if not anti_aliasing
+        SDL::Gfx.lineRGBA(*args)
+      end
+      if anti_aliasing
+        SDL::Gfx.aalineRGBA(*args)
+      end
+      self
+    end
+
+    # Draw a rectangle over +area+.
+    #
+    #   area:   The area which the new rectangle will cover. Should be an instance of Rubydraw::Rectangle.
+    #   color:  Specifies what color to use when drawing the rectangle. If +fill+ is enabled, it will fill the new rect with this color. If not, it will only affect the border.
+    #   fill:   A boolean determining whether to fill it in or not.
+    def draw_rectangle(area, color, fill=true)
+      tl = area.top_left
+      br = area.bottom_right
+      r, g, b, a = color.to_a
+      args = [@screen, tl.x, tl.y, br.x, br.y, r, g, b, a]
+      if fill
+        SDL::Gfx.boxRGBA(*args)
+      end
+      if not fill
+        SDL::Gfx.rectangleRGBA(*args)
+      end
+      self
+    end
+
+    alias draw_rect draw_rectangle
+
+    # Draw an ellipse. Similar to Rubydraw::Window#draw_circle, except not all ellipses are circles.
+    #
+    #   center:       The center of the ellipse, should be a Rubydraw::Point object.
+    #   dimensions:   Determines the width and the height of the ellipse to be drawn; should be a Rubydraw::Point.
+    #   color:        The color to use when drawing; should be an instance of Rubydraw::Color.
+    #   fill:         Fill the ellipse with said color?
+    def draw_ellipse(center, dimensions, color, mode=:fill)
+      x, y = center.to_a
+      width, height = (dimensions / 2).to_a
+      r, g, b, a = color.to_a
+      args = [@screen, x, y, width, height, r, g, b, a]
+      if mode == :fill
+        SDL::Gfx.filledEllipseRGBA(*args)
+        return self
+      end
+      if mode == :outline
+        SDL::Gfx.ellipseRGBA(*args)
+        return self
+      end
+      if mode == :aa
+        SDL::Gfx.aaellipseRGBA(*args)
+        return self
+      end
+      # Only gets here when +mode+ is not recognised.
+      raise ArgumentError, "Unknown mode '#{mode}'"
+    end
+
+    # Draw a circle.
+    def draw_circle(center, radius, color, mode=:fill)
+      draw_ellipse(center, Point[radius, radius], color, mode)
+    end
   end
 end

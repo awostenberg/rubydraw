@@ -69,8 +69,8 @@ module Rubydraw
     Green = new(0, 255, 0)
     Blue = new(0, 0, 255)
     # Secondary colors
-    Yellow = new(255, 255, 0)
-    Magenta = new(255, 0, 255)
+    Yellow = new(255, 0, 255)
+    Magenta = new(255, 255, 0)
     Cyan = new(0, 255, 255)
   end
 end
