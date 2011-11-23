@@ -8,7 +8,7 @@ module Rubydraw
     attr_reader(:width, :height)
 
     # Create a new window.
-    def initialize(width, height, bkg_color=Color::Black)\
+    def initialize(width, height, bkg_color=Color::Black)
       @width = width
       @height = height
       @open = false

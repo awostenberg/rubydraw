@@ -11,7 +11,7 @@ module Rubydraw
     end
 
     # Create a new rectangle with the given dimensions and position.
-    def initialize(position, dimensions)``
+    def initialize(position, dimensions)
       @position, @dimensions = position, dimensions
     end
 
