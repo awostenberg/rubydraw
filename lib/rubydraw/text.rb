@@ -4,6 +4,7 @@ module Rubydraw
   # screen.
   class Text
     attr_accessor(:contents, :font, :color, :size)
+
     # Create a new drawable Text object with the given font and contents.
     def initialize(contents, color, font_name="Times New Roman", size = 25)
       @font, @contents, @size, @color = font_name, contents, size, color
