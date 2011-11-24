@@ -1,4 +1,7 @@
 module Rubydraw
+  # A sort of alias to Rubydraw::Mouse
+  Ms = Mouse
+
   # Keys defines constants which identify with a key integer.
   #
   # Example:
@@ -90,6 +93,13 @@ module Rubydraw
     CapsLock        = SDL::K_CAPSLOCK
     Backspace       = SDL::K_BACKSPACE
     Delete          = SDL::K_DELETE
+  end
 
+  # Provides constants for mouse buttons.
+  module Mouse
+    Left            = 1
+    Right           = 3
+    Up              = 4
+    Down            = 5
   end
 end
