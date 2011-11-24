@@ -2,7 +2,7 @@ require 'rubygems'
 
 SPEC = Gem::Specification.new do |spec|
   spec.name         = "rubydraw"
-  spec.version      = "0.2.2.4a"
+  spec.version      = "0.2.2.5"
   spec.author       = "J. Wostenberg"
   spec.summary      = "Rubydraw is a high level drawing/graphics library, like Gosu or Rubygame."
   spec.description  = "

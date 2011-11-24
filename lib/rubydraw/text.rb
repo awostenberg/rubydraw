@@ -21,13 +21,27 @@ module Rubydraw
       raise(SDLError, "Failed to initialize font: #{SDL.GetError}") if @drawable.pointer.null?
     end
 
+    # Returns the sdl surface of this text object.
+    def sdl_surface
+      sdl_color = @color.to_sdl
+      SDL::TTF.RenderText_Blended(@drawable, @contents, sdl_color)
+    end
+
     # Draw the font in the given window at a position.
     def draw(window, position)
-      sdl_color = @color.to_sdl
-      sdl_surface = SDL::TTF.RenderText_Blended(@drawable, @contents, sdl_color)
       source_rect = Rectangle[Point[0, 0], Point[sdl_surface.w, sdl_surface.h]]
       blit_rect = Rectangle[position, Point[window.width, window.height]]
       SDL::BlitSurface(sdl_surface, source_rect.to_sdl, window.sdl_surface, blit_rect.to_sdl)
+    end
+
+    # Returns the width.
+    def width
+      sdl_surface.w
+    end
+
+    # Returns the height.
+    def height
+      sdl_surface.h
     end
   end
 end
