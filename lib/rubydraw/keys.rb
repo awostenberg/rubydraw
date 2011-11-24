@@ -1,7 +1,4 @@
 module Rubydraw
-  # A sort of alias to Rubydraw::Mouse
-  Ms = Mouse
-
   # Keys defines constants which identify with a key integer.
   #
   # Example:
@@ -102,4 +99,7 @@ module Rubydraw
     Up              = 4
     Down            = 5
   end
+
+  # A sort of alias to Rubydraw::Mouse
+  Ms = Mouse
 end
