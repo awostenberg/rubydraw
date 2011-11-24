@@ -5,26 +5,31 @@ module Rubydraw
   # (which starts when Rubydraw::Window#open is called) is *not* forked! It will break
   # when Rubydraw::Window#close is called.
   class Window
-    attr_reader(:width, :height)
+    attr_reader(:width, :height, :fullscreen, :bkg_color)
 
     # Create a new window.
-    def initialize(width, height, bkg_color=Color::Black)
-      @width = width
-      @height = height
+    def initialize(width, height, fullscreen=false, bkg_color=Color::Black)
+      @width, @height = width, height
+      @fullscreen = fullscreen
+      @bkg_color = bkg_color
       @open = false
+      @flags =
+      if fullscreen
+        SDL::FULLSCREEN
+      else
+        0
+      end
 
       @event_queue = EventQueue.new
 
       @registered_actions = {}
-
-      @bkg_color = bkg_color
     end
 
     # Call this method to start updating and drawing.
     def show
       @open = true
       # Behold, the main loop. Drumroll!
-      @screen = SDL::SetVideoMode(@width, @height, 0, 0)
+      @screen = SDL::SetVideoMode(@width, @height, 0, @flags)
       loop do
         handle_events
         if @open
@@ -61,6 +66,21 @@ module Rubydraw
     end
 
     alias quit close
+
+    # Returns the window's current title.
+    def title
+      SDL.WM_GetCaption
+    end
+
+    # Sets the window title to +new+.
+    def title=(new)
+      SDL.WM_SetCaption(new, new)
+    end
+
+    # Sets the window's icon to +new+.
+    def icon=(new)
+      SDL.WM_SetIcon(new.to_sdl, nil)
+    end
 
     # Collect and handle new events by executing blocks in +@regestered_events+. See
     # Rubydraw::Window#register_action on how to use it.
@@ -147,15 +167,17 @@ module Rubydraw
 
     # Draw an ellipse. Similar to Rubydraw::Window#draw_circle, except not all ellipses are circles.
     #
-    #   center:       The center of the ellipse, should be a Rubydraw::Point object.
-    #   dimensions:   Determines the width and the height of the ellipse to be drawn; should be a Rubydraw::Point.
-    #   color:        The color to use when drawing; should be an instance of Rubydraw::Color.
-    #   fill:         Fill the ellipse with said color?
+    #   center:         The center of the ellipse, should be a Rubydraw::Point object.
+    #   dimensions:     Determines the width and the height of the ellipse to be drawn; should be a Rubydraw::Point.
+    #   color:          The color to use when drawing; should be an instance of Rubydraw::Color.
+    #   fill:           Fill the ellipse with said color?
+    #   anti_aliasing:  When set to true, smoothing happens.
     def draw_ellipse(center, dimensions, color, mode=:fill)
       x, y = center.to_a
       width, height = (dimensions / 2).to_a
       r, g, b, a = color.to_a
       args = [@screen, x, y, width, height, r, g, b, a]
+
       if mode == :fill
         SDL::Gfx.filledEllipseRGBA(*args)
         return self
@@ -168,7 +190,8 @@ module Rubydraw
         SDL::Gfx.aaellipseRGBA(*args)
         return self
       end
-      # Only gets here when +mode+ is not recognised.
+
+      # Only reaches this when +mode+ is not recognized.
       raise ArgumentError, "Unknown mode '#{mode}'"
     end
 

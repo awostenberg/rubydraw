@@ -40,5 +40,10 @@ module Rubydraw
     def height
       @sdl_image.h
     end
+
+    # Returns the sdl surface.
+    def to_sdl
+      @sdl_image
+    end
   end
 end
