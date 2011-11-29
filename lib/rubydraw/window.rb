@@ -29,7 +29,11 @@ module Rubydraw
       begin
         return @screen.w
       rescue NameError
-        return Rubydraw.screen_width
+        if @width == 0
+          return Rubydraw.screen_width
+        else
+          return @width
+        end
       end
     end
 
@@ -37,7 +41,11 @@ module Rubydraw
       begin
         return @screen.h
       rescue NameError
-        return Rubydraw.screen_height
+        if @height == 0
+          return Rubydraw.screen_height
+        else
+          return @height
+        end
       end
     end
 
