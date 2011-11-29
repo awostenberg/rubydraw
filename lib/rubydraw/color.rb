@@ -6,6 +6,18 @@ module Rubydraw
   # instance can return its numerical value, but only Rubydraw itself
   # should need it.
   class Color
+    # Returns true if all arguments are within the valid RGB color
+    # values (0-255).
+    def self.in_bounds?(*args)
+      args.each {|element|
+        if (0..255).include?(element)
+          return true
+        else
+          return false
+        end
+      }
+    end
+
     # Shorthand new method.
     def self.[](red, green, blue, alpha = 0)
       self.new(red, green, blue, alpha)
@@ -18,6 +30,9 @@ module Rubydraw
     #
     # TODO: Add other color specs, like HSV or maybe CYMK
     def initialize(red, green, blue, alpha = 255)
+      unless self.class.in_bounds?(red, green, blue, alpha)
+        raise IndexError, "One or more color values are out of bounds (must be between 0 and 255)"
+      end
       @red, @green, @blue, @alpha = red, green, blue, alpha
       calc_num_val
     end
@@ -31,8 +46,7 @@ module Rubydraw
       hex_green = (@green.to_s(16)).color_string
       hex_blue = (@blue.to_s(16)).color_string
       # Construct a hex string using the previously determined hex colors.
-      # *Note:* it appears that SDL's (or maybe ruby-sdl-ffi's) color
-      # is backwards. The order appears to be: +BBGGRRAA+
+      # *Note:* it appears that SDL's colors are in the format +BBGGRRAA+.
       color_str = hex_blue + hex_green + hex_red + hex_alpha
       @num_val = color_str.to_i(16)
     end

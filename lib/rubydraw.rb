@@ -49,6 +49,27 @@ module Rubydraw
     end
   end
 
+  def self.vinfo #:nodoc:
+    SDL.GetVideoInfo
+  end
+
+  private_class_method :vinfo
+
+  # Returns the screen width.
+  def self.screen_width
+    vinfo.current_w
+  end
+
+  # Returns the screen height.
+  def self.screen_height
+    vinfo.current_h
+  end
+
+  # Returns the screen size.
+  def self.screen_dimensions
+    Point[screen_width, screen_height]
+  end
+
   # Enable/disable key repeating. After this method is called, instances of Rubydraw::Events::KeyPressed
   # wil be continually created, until the key is released.
   #

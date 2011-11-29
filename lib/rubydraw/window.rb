@@ -26,11 +26,19 @@ module Rubydraw
     end
 
     def width
-      @screen.w
+      begin
+        return @screen.w
+      rescue NameError
+        return Rubydraw.screen_width
+      end
     end
 
     def height
-      @screen.h
+      begin
+        return @screen.h
+      rescue NameError
+        return Rubydraw.screen_height
+      end
     end
 
     # Call this method to start updating and drawing.
