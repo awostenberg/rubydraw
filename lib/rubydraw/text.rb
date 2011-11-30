@@ -30,12 +30,18 @@ module Rubydraw
       @sdl_surface
     end
 
-    # Draw the font in the given window at a position.
-    def draw(window, position)
+    alias to_sdl sdl_surface
+
+    # Blit (copy) into +surface at +position+ (see Rubydraw::Point).
+    # No graphical effects are applied.
+    def blit(surface, position)
       source_rect = Rectangle[Point[0, 0], Point[width, height]]
-      blit_rect = Rectangle[position, Point[window.width, window.height]]
-      SDL::BlitSurface(@sdl_surface, source_rect.to_sdl, window.sdl_surface, blit_rect.to_sdl)
+      blit_rect = Rectangle[position, Point[surface.width, surface.height]]
+      SDL::BlitSurface(sdl_surface, source_rect.to_sdl, surface.to_sdl, blit_rect.to_sdl)
+      self
     end
+
+    alias draw blit
 
     # Returns the width.
     def width

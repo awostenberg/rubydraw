@@ -138,6 +138,7 @@ module Rubydraw
       @screen
     end
 
+    alias to_sdl sdl_surface
 
     # Redefine Rubydraw::Window#tick with any code you want to be executed
     # every frame, like drawing functions.

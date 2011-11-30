@@ -14,7 +14,7 @@ module Rubydraw
       elsif arg.is_a?(SDL::Surface)
         load_from_surface(arg)
       else
-        raise TypeError, "Failed to load image: Expected String or SDL::Surface but got #{arg}"
+        raise TypeError, "Failed to load image: Expected String or SDL::Surface but got: #{arg}"
       end
       self
     end
@@ -45,19 +45,16 @@ module Rubydraw
       @sdl_image = surface
     end
 
-    # Blit (copy) into the window at +position+ (see Rubydraw::Point).
+    # Blit (copy) into +surface at +position+ (see Rubydraw::Point).
     # No graphical effects are applied.
-    #
-    # Notice that you don't blit surfaces to other surfaces when using
-    # Rubygame, but instead you draw things.
-    def draw(window, position)
+    def blit(surface, position)
       source_rect = Rectangle[Point[0, 0], Point[width, height]]
-      blit_rect = Rectangle[position, Point[window.width, window.height]]
-      #source_rect = Rectangle[Point[0, 0], Point[window.width, window.height]]
-      #blit_rect = Rectangle[position, Point[window.width, window.height]]
-      SDL::BlitSurface(@sdl_image, source_rect.to_sdl, window.sdl_surface, blit_rect.to_sdl)
+      blit_rect = Rectangle[position, Point[surface.width, surface.height]]
+      SDL::BlitSurface(@sdl_image, source_rect.to_sdl, surface.to_sdl, blit_rect.to_sdl)
       self
     end
+
+    alias draw blit
 
     # Rotates and/or expands the image. Note that this modifies the image
     # itself.
