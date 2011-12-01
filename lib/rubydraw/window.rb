@@ -96,7 +96,6 @@ module Rubydraw
 
     # Convert +color+ to the display format.
     def convert(color)
-      puts @fullscreen
       if @fullscreen
         return color.to_i(:display_fullscreen)
       else
