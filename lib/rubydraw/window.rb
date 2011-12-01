@@ -5,7 +5,8 @@ module Rubydraw
   # (which starts when Rubydraw::Window#open is called) is *not* forked! It will break
   # when Rubydraw::Window#close is called.
   class Window
-    attr_reader(:fullscreen, :bkg_color)
+    attr_reader(:fullscreen)
+    attr_accessor(:bkg_color)
 
     # Create a new window.
     def initialize(width, height, fullscreen=false, bkg_color=Color::Black)

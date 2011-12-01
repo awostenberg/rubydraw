@@ -99,6 +99,21 @@ module Rubydraw
       SDL::Color.new(to_a)
     end
 
+    # Return a new color resulting from mixing this color and +other+ additively.
+    def +(other, a=255)
+      r = [@red + other.red, 255].min
+      g = [@green + other.green, 255].min
+      b = [@blue + other.blue, 255].min
+      Color.new(r, g, b, a)
+    end
+
+    # Return a new color that is the average of this color and +other+.
+    def /(other, a=255)
+      r = [(@red + other.red) / 2, 255].min
+      g = [(@green + other.green) / 2, 255].min
+      b = [(@blue + other.blue) / 2, 255].min
+      Color.new(r, g, b, a)
+    end
 
     White = new(255, 255, 255)
     Black = new(0, 0, 0)
@@ -107,8 +122,13 @@ module Rubydraw
     Green = new(0, 255, 0)
     Blue = new(0, 0, 255)
     # Secondary colors
-    Yellow = new(255, 0, 255)
-    Magenta = new(255, 255, 0)
+    Yellow = new(255, 255, 0)
+    Magenta = new(255, 0, 255)
     Cyan = new(0, 255, 255)
+    # Other colors
+    Purple = new(128, 0, 255)
+    Orange = new(255, 128, 0)
+    Pink = new(255, 0, 128)
+    Grey = new(128, 128, 128)
   end
 end
