@@ -144,11 +144,12 @@ module Rubydraw
         end }
     end
 
-    # This causes the main loop to exit. Use Rubydraw::Window#close to close the
-    # window, not this.
+    # Causes the main loop to exit as soon as it get the chance to.
     def break_main_loop
       @open = false
     end
+
+    private :break_main_loop
 
     # Returns if this window is open.
     def open?
@@ -196,7 +197,7 @@ module Rubydraw
     #
     #   area:   The area which the new rectangle will cover. Should be an instance of Rubydraw::Rectangle.
     #   color:  Specifies what color to use when drawing the rectangle. If +fill+ is enabled, it will fill the new rect with this color. If not, it will only affect the border.
-    #   fill:   A boolean determining whether to fill it in or not.
+    #   fill:   A boolean determining whether to fill it in or not. (anti-aliasing is not needed because all the lines are perfectly straigt)
     def draw_rectangle(area, color, fill=true)
       tl = area.top_left
       br = area.bottom_right
@@ -218,8 +219,7 @@ module Rubydraw
     #   center:         The center of the ellipse, should be a Rubydraw::Point object.
     #   dimensions:     Determines the width and the height of the ellipse to be drawn; should be a Rubydraw::Point.
     #   color:          The color to use when drawing; should be an instance of Rubydraw::Color.
-    #   fill:           Fill the ellipse with said color?
-    #   anti_aliasing:  When set to true, smoothing happens.
+    #   mode:           Can be one of three modes; +:fill+, +:outline+, or +:aa+. When set to +:fill+, it will draw a *solid* ellipse. When it is +:outline+, it renders without filling. When set to +:aa+ (anti-aliasing), it will draw without filling and smooth the border.
     def draw_ellipse(center, dimensions, color, mode=:fill)
       x, y = center.to_a
       width, height = (dimensions / 2).to_a

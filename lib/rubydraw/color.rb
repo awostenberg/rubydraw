@@ -57,9 +57,9 @@ module Rubydraw
     end
 
     # Convert this color to a numerical value, which only makes sense when
-    # read as a hex number, e.g. red would be: +0000ff00+.
+    # read as a hex number.
     #
-    # Also see the comments in: Rubydraw::Color#calc_num_val.
+    # Also see the comments in: Rubydraw::Color#calc_num_vals.
     def to_i(format)
       if format == :surface or format == :display_fullscreen
         return @surface_num_val
@@ -83,10 +83,10 @@ module Rubydraw
     #
     # Example:
     #   color = Rubydraw::Color.new(red = 200, green = 60, blue = 5, alpha = 255)
-    #   => #<Rubydraw::Color:0x10039cf50 @green=60, @red=200, @alpha=255, @num_val=87869695, @blue=5>
+    #   => #<Rubydraw::Color: (@red: 200, @green: 60, @blue: 5, @alpha: 255)>
     #   color.to_ary
     #   => [200, 60, 5, 255]
-    def to_a
+    def to_ary
       [@red, @blue, @green, @alpha]
     end
 
@@ -96,7 +96,7 @@ module Rubydraw
 
     # Create an SDL::Color equivilent to this Rubydraw::Color.
     def to_sdl
-      SDL::Color.new(to_a)
+      SDL::Color.new(to_ary)
     end
 
     # Return a new color resulting from mixing this color and +other+ additively.
