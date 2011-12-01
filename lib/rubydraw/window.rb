@@ -27,11 +27,11 @@ module Rubydraw
       @bkg_color = bkg_color
       @open = false
       @flags =
-      if fullscreen
-        SDL::FULLSCREEN
-      else
-        0
-      end
+          if fullscreen
+            SDL::FULLSCREEN
+          else
+            0
+          end
 
       @event_queue = EventQueue.new
 
@@ -91,7 +91,17 @@ module Rubydraw
     # Fill the entire window with a Rubydraw::Color. Do this by feeding SDL the numeric
     # verion of the color; see Rubydraw::Color#to_i
     def fill_with(color)
-      SDL::FillRect(@screen, nil, color.to_i)
+      SDL::FillRect(@screen, nil, convert(color))
+    end
+
+    # Convert +color+ to the display format.
+    def convert(color)
+      puts @fullscreen
+      if @fullscreen
+        return color.to_i(:display_fullscreen)
+      else
+        return color.to_i(:display)
+      end
     end
 
     # Call this method to tell SDL to quit drawing. The loop (started in
@@ -127,11 +137,11 @@ module Rubydraw
       #events.each {|event|
       #  block = @registered_actions[event.class]
       #  block.call(event) unless block.nil?}
-      events.each {|event|
+      events.each { |event|
         blocks = @registered_actions[event.class]
         unless blocks.nil?
-          blocks.each {|b| b.call(event) unless b.nil?}
-        end}
+          blocks.each { |b| b.call(event) unless b.nil? }
+        end }
     end
 
     # This causes the main loop to exit. Use Rubydraw::Window#close to close the

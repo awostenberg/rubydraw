@@ -20,7 +20,7 @@ module Rubydraw
     end
 
     def load_from_path(path)  #:nodoc:
-      # Check if this image has already been initialize. If it has, raise
+      # Check if this image has already been initialized. If it has, raise
       # an error.
       unless @sdl_image.nil?
         raise SDLError, "Images may only be loaded once"
@@ -44,6 +44,8 @@ module Rubydraw
       end
       @sdl_image = surface
     end
+
+    private :load_from_path, :load_from_surface
 
     # Blit (copy) into +surface at +position+ (see Rubydraw::Point).
     # No graphical effects are applied.

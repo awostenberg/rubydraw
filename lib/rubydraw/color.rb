@@ -34,30 +34,50 @@ module Rubydraw
         raise IndexError, "One or more color values are out of bounds (must be between 0 and 255)"
       end
       @red, @green, @blue, @alpha = red, green, blue, alpha
-      calc_num_val
+      calc_num_vals
     end
 
-    # Calculate and store the numerical value in @num_val. You shouldn't
-    # need this (see Rubydraw::Color.new).
-    def calc_num_val
+    # Calculate and store the numerical values. You shouldn't need
+    # this (see Rubydraw::Color.new).
+    def calc_num_vals
       # Get the hex string for each value.
       hex_alpha = (@alpha.to_s(16)).color_string
       hex_red = (@red.to_s(16)).color_string
       hex_green = (@green.to_s(16)).color_string
       hex_blue = (@blue.to_s(16)).color_string
-      # Construct a hex string using the previously determined hex colors.
-      # *Note:* it appears that SDL's colors are in the format +BBGGRRAA+.
-      color_str = hex_blue + hex_green + hex_red + hex_alpha
-      @num_val = color_str.to_i(16)
+      # Construct a hex string (only compatible with surfaces other than
+      # the window) using the previously determined hex colors. Not sure
+      # how alpha comes in here yet... I'll figure it out.
+      surf_color_string = hex_red + hex_green + hex_blue
+      @surface_num_val = surf_color_string.to_i(16)
+      # *Note:* SDL's color format for the display is different than other
+      # ordinary surfaces. It is: +BBGGRRAA+.
+      display_color_string = hex_blue + hex_green + hex_red + hex_alpha
+      @display_num_val = display_color_string.to_i(16)
     end
 
     # Convert this color to a numerical value, which only makes sense when
     # read as a hex number, e.g. red would be: +0000ff00+.
     #
     # Also see the comments in: Rubydraw::Color#calc_num_val.
-    def to_i
-      @num_val
+    def to_i(format)
+      if format == :surface or format == :display_fullscreen
+        return @surface_num_val
+      end
+      if format == :display
+        return @display_num_val
+      end
+      raise ArgumentError, "Unrecognized color format \"@{format}\""
     end
+
+    # Returns the complimentary color.
+    def invert
+      Color.new(255 - @red, 255 - @green, 255 - @blue, @alpha)
+    end
+
+    alias complimentary invert
+    alias opposite invert
+    alias reverse invert
 
     # Returns an Array containing each +rgba+ value.
     #
@@ -68,6 +88,10 @@ module Rubydraw
     #   => [200, 60, 5, 255]
     def to_a
       [@red, @blue, @green, @alpha]
+    end
+
+    def to_s
+      "#<#{self.class}: (@red: #{@red}, @green: #{@green}, @blue: #{@blue}, @alpha: #{@alpha})>"
     end
 
     # Create an SDL::Color equivilent to this Rubydraw::Color.
