@@ -2,7 +2,7 @@ module Rubydraw
   # Text objects are instantiazed with the font (can be a TTF file) and
   # with the text to display. They can be drawn at a position on the
   # screen.
-  class Text
+  class Text < Surface
     attr_reader(:contents, :font, :color, :size)
 
     # Create a new drawable Text object with the given font and contents.
@@ -23,34 +23,6 @@ module Rubydraw
 
       sdl_color = @color.to_sdl
       @sdl_surface = SDL::TTF.RenderText_Blended(sdl_text, @contents, sdl_color)
-    end
-
-    # Returns the SDL surface for this object.
-    def sdl_surface
-      @sdl_surface
-    end
-
-    alias to_sdl sdl_surface
-
-    # Blit (copy) into +surface at +position+ (see Rubydraw::Point).
-    # No graphical effects are applied.
-    def blit(surface, position)
-      source_rect = Rectangle[Point[0, 0], Point[width, height]]
-      blit_rect = Rectangle[position, Point[surface.width, surface.height]]
-      SDL::BlitSurface(sdl_surface, source_rect.to_sdl, surface.to_sdl, blit_rect.to_sdl)
-      self
-    end
-
-    alias draw blit
-
-    # Returns the width.
-    def width
-      @sdl_surface.w
-    end
-
-    # Returns the height.
-    def height
-      @sdl_surface.h
     end
   end
 end
