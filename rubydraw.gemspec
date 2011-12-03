@@ -17,6 +17,7 @@ SPEC = Gem::Specification.new do |spec|
   spec.require_paths  << "lib"
   lib_files           = %w[
     window.rb
+    flags.rb
     surface.rb
     image.rb
     sound.rb

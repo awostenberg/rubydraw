@@ -17,12 +17,14 @@ module Rubydraw
       if height < 0
         raise SDLError, "New window height cannot be less than zero"
       end
-      if height == 0
-        # Compensate for the height of the window bar itself, the menu bar at the top
-        # of the screen, and a space of around 4px at the bottom of the screen. Not
-        # sure what the numbers would be for anything other than Mac OSX; more info
-        # would be appreciated.
-        height = Rubydraw::screen_height - 48
+      unless flags.include?(Flags::Fullscreen)
+        if height == 0
+          # Compensate for the height of the window bar itself, the menu bar at the top
+          # of the screen, and a space of around 4px at the bottom of the screen. Not
+          # sure what the numbers would be for anything other than Mac OSX; more info
+          # would be appreciated.
+          height = Rubydraw::screen_height - 48
+        end
       end
       @width, @height, @flags, @bkg_color = width, height, Flags.collapse(flags), bkg_color
       @open = false
