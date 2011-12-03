@@ -4,7 +4,7 @@ require 'rubydraw'
 class MyWindow < Rubydraw::Window
   # Create a new window with an bug image inside it
   def initialize
-    super(300, 300)
+    super(Point[300, 300])
     @image = Rubydraw::Image.new("media/bug.png")
     whenever Rubydraw::Events::QuitRequest do
       close

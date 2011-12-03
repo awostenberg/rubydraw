@@ -3,7 +3,7 @@ require 'rubydraw'
 
 class GameWindow < Rubydraw::Window
   def initialize
-    super(500, 500, false, Rubydraw::Color::White)
+    super(Point[500, 500], [], Rubydraw::Color::White)
     @score = 0
     @score_text = Rubydraw::Text.new("", Rubydraw::Color::Black)
     @game_objects = []
