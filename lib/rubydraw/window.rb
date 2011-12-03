@@ -5,11 +5,12 @@ module Rubydraw
   # (which starts when Rubydraw::Window#open is called) is *not* forked! It will break
   # when Rubydraw::Window#close is called.
   class Window
-    attr_reader(:fullscreen)
     attr_accessor(:bkg_color)
 
     # Create a new window.
-    def initialize(width, height, fullscreen=false, bkg_color=Color::Black)
+    def initialize(dimensions, flags=[], bkg_color=Color::Black)
+      width, height = dimensions.to_ary
+      @fullscreen = flags.include?(Rubydraw::Flags::Fullscreen)
       if width < 0
         raise SDLError, "New window width cannot be less than zero"
       end
@@ -23,16 +24,8 @@ module Rubydraw
         # would be appreciated.
         height = Rubydraw::screen_height - 48
       end
-      @width, @height = width, height
-      @fullscreen = fullscreen
-      @bkg_color = bkg_color
+      @width, @height, @flags, @bkg_color = width, height, Flags.collapse(flags), bkg_color
       @open = false
-      @flags =
-          if fullscreen
-            SDL::FULLSCREEN
-          else
-            0
-          end
 
       @event_queue = EventQueue.new
 
@@ -133,10 +126,6 @@ module Rubydraw
     # Rubydraw::Window#register_action on how to use it.
     def handle_events
       events = @event_queue.get_events
-
-      #events.each {|event|
-      #  block = @registered_actions[event.class]
-      #  block.call(event) unless block.nil?}
       events.each { |event|
         blocks = @registered_actions[event.class]
         unless blocks.nil?

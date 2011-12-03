@@ -79,7 +79,7 @@ module Rubydraw
       end
     end
 
-    def to_a
+    def to_ary
       [@x, @y]
     end
 

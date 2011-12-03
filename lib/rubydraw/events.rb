@@ -21,7 +21,7 @@ module Rubydraw
     # each event class if it matches the SDL event. No case statements here.
     def self.match(sdl_event)
       event_classes = Event.all_subclasses.compact
-      rubydraw_event = UnknownEvent.new
+      rubydraw_event = UnknownEvent.new(sdl_event)
       # Remove all the classes that don't want to be included in the search
       event_classes.delete_if {|event_class| not event_class.wants_to_match?}
       event_classes.each {|event_class| rubydraw_event = event_class.from_sdl_event(sdl_event) if event_class.matches?(sdl_event)}
@@ -64,6 +64,18 @@ module Rubydraw
     # A special event class that is called when no Rubydraw event is matched to an
     # SDL event.
     class UnknownEvent < Event
+      # The SDL event should be passed so that the programmer using this library can still
+      # attempt to implement behavior, but it will have to match and SDL event, not a
+      # Rubydraw::Events::Event.
+      def from_sdl_event(sdl_event)
+        self.new(sdl_event)
+      end
+
+      attr_reader(:sdl_event)
+
+      def initialize(sdl_event)
+        @sdl_event = sdl_event
+      end
     end
 
     # Provides methods used in both Rubydraw::Events::KeyPressed and
@@ -211,7 +223,8 @@ module Rubydraw
       end
     end
 
-    # Created when the window gains focus.
+    # Created when the window gains focus, e.g. clicking on the window after previously using
+    # another application.
     class FocusGain < FocusEvent
       def self.wants_to_match?
         true
@@ -220,11 +233,10 @@ module Rubydraw
       # Redefine Event#matches? because both this class and Rubydraw::Events::FocusLoss use
       # SDL::ActiveEvent.
       def self.matches?(sdl_event)
-        result = false
         if super(sdl_event)
-          result = sdl_event.gain == 1
+          return sdl_event.gain == 1
         end
-        result
+        return false
       end
     end
 
@@ -237,20 +249,46 @@ module Rubydraw
       # Redefine Event#matches? because both this class and Rubydraw::Events::FocuGain use
       # SDL::ActiveEvent
       def self.matches?(sdl_event)
-        result = false
         if super(sdl_event)
-          result = sdl_event.gain == 0
+          return sdl_event.gain == 0
         end
-        result
+        return false
       end
     end
 
     # Created when the user attempts to close the window.
     class QuitRequest < Event
-
       def self.matching_sdl_type
         SDL::QUIT
       end
+    end
+
+    # Created when the user resizes the window. This can only happen if Rubydraw::Flags::Resizable
+    # is passed when the window is created.
+    class ResizeEvent < Event
+      def self.matching_sdl_type
+        SDL::VIDEORESIZE
+      end
+
+      def self.from_sdl_event(sdl_event)
+        self.new(Point[sdl_event.w, sdl_event.h])
+      end
+
+      def initialize(dimensions)
+        @dimensions = dimensions
+      end
+
+      def width
+        @dimensions.x
+      end
+
+      def height
+        @dimensions.y
+      end
+
+      alias :x :width
+
+      alias :y :height
     end
   end
 end

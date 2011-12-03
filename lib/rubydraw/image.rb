@@ -32,7 +32,7 @@ module Rubydraw
       if @sdl_surface.pointer.null?
         # SDL couln't load the image; usually happens because it doesn't
         # exist.
-        raise Rubydraw::SDLError "Failed to load image: #{SDL.GetError}"
+        raise SDLError "Failed to load image: #{SDL.GetError}"
       end
     end
 

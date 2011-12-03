@@ -8,6 +8,7 @@ require 'ext/object'
 # Require all the rubydraw files
 files = %w[
   window
+  flags
   surface
   image
   sound
