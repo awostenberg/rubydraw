@@ -274,6 +274,8 @@ module Rubydraw
         self.new(Point[sdl_event.w, sdl_event.h])
       end
 
+      attr_accessor(:dimensions)
+
       def initialize(dimensions)
         @dimensions = dimensions
       end
