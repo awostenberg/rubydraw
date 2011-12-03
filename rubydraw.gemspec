@@ -2,7 +2,7 @@ require 'rubygems'
 
 SPEC = Gem::Specification.new do |spec|
   spec.name         = "rubydraw"
-  spec.version      = "0.2.9"
+  spec.version      = "0.2.9.3"
   spec.author       = "J. Wostenberg"
   spec.summary      = "Rubydraw is a high level drawing/graphics library, like Gosu or Rubygame."
   spec.description  = "
@@ -28,7 +28,8 @@ SPEC = Gem::Specification.new do |spec|
     events.rb
     point.rb
     color.rb
-    rectangle.rb]
+    rectangle.rb
+    mouse_state.rb]
   example_files       = %w[
     window_ex.rb
     image_ex.rb
