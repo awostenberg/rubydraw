@@ -265,7 +265,7 @@ module Rubydraw
 
     # Created when the user resizes the window. This can only happen if Rubydraw::Flags::Resizable
     # is passed when the window is created.
-    class ResizeEvent < Event
+    class WindowResize < Event
       def self.matching_sdl_type
         SDL::VIDEORESIZE
       end
