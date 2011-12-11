@@ -2,15 +2,14 @@ require 'rubygems'
 
 SPEC = Gem::Specification.new do |spec|
   spec.name         = "rubydraw"
-  spec.version      = "0.2.9.3"
+  spec.version      = "0.3.0"
   spec.author       = "J. Wostenberg"
   spec.summary      = "Rubydraw is a high level drawing/graphics library, like Gosu or Rubygame."
   spec.description  = "
     Rubydraw is a high level drawing/game library,
-    like Gosu or Rubygame. Its only dependencies are
-    ruby-sdl-ffi--which it uses to access SDL
-    functions--and SDL itself (See README on how to
-    install the latter)."
+    like Gosu or Rubygame.
+    Dependancies: ruby-sdl-ffi, SDL (not a ruby gem),
+    and 2DArray."
 
   spec.homepage       = "https://github.com/awostenberg/rubydraw"
   spec.platform       = Gem::Platform::RUBY
@@ -57,4 +56,5 @@ SPEC = Gem::Specification.new do |spec|
   fonts.collect! {|font_name| "lib/fonts/#{font_name}.ttf"}
   spec.files          = ["README", "lib/rubydraw.rb", lib_files, example_files, ext_files, fonts].flatten
   spec.add_dependency("ruby-sdl-ffi", ">= 0.4")
+  spec.add_dependency("2DArray", ">= 0.1.0")
 end

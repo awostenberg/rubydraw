@@ -84,5 +84,109 @@ module Rubydraw
     def to_sdl
       @sdl_surface
     end
+
+    # This is a private method because it doesn't lock the SDL surface (too
+    # much locking and unlocking for Rubydraw::Surface#pixels). Use
+    # Rubydraw::Surface#get_pixel.
+    #
+    # Credit goes to Rubygame and the SDL docs for showing how to access this
+    # information.
+    def basic_get_pix(point)
+      bpp = @sdl_surface.format.BytesPerPixel
+      p = @sdl_surface.pixels + (point.y * @sdl_surface.pitch + point.x * bpp)
+
+      pcolor =
+          case bpp
+            when 1
+              p.get_uint8(0)
+            when 2
+              p.get_uint16(0)
+            when 3
+              if (FFI::Platform::BYTE_ORDER == FFI::Platform::BIG_ENDIAN)
+                (ptr.get_uint8(0) << 16)|(ptr.get_uint8(1) << 8)|ptr.get_uint8(2)
+              else
+                ptr.get_uint8(0)|(ptr.get_uint8(1) << 8)|(ptr.get_uint8(2) << 16)
+              end
+            when 4
+              p.get_uint32(0)
+          end
+
+      r, g, b, a = SDL.GetRGBA(pcolor, @sdl_surface.format)
+      Rubydraw::Color.new(r, g, b, a)
+    end
+
+    # This is a private method because it doesn't lock the SDL surface (too
+    # much locking and unlocking for Rubydraw::Surface#pixels_do). Use
+    # Rubydraw::Surface#set_pixel.
+    #
+    # Credit goes to Rubygame and the SDL docs for showing how to access this
+    # information.
+    def basic_set_pix(point, new_color)
+      color = new_color.to_i(:surface)
+
+      bpp = @sdl_surface.format.BytesPerPixel
+      p = @sdl_surface.pixels + (point.y * @sdl_surface.pitch + point.x * bpp)
+
+      case bpp
+        when 1
+          p.put_uint8(0, color)
+        when 2
+          p.put_uint16(0, color)
+        when 3
+          if (FFI::Platform::BYTE_ORDER == FFI::Platform::BIG_ENDIAN)
+            p.put_uint8(0, (color >> 16) & 0xff)
+            p.put_uint8(1, (color >> 8) & 0xff)
+            p.put_uint8(2, color & 0xff)
+          else
+            p.put_uint8(0, color & 0xff)
+            p.put_uint8(1, (color >> 8) & 0xff)
+            p.put_uint8(2, (color >> 16) & 0xff)
+          end
+        when 4
+          p.put_uint32(0, color)
+      end
+
+      return new_color
+    end
+
+    private :basic_set_pix
+    private :basic_get_pix
+
+    # Returns the color of the pixel at +point+.
+    def get_pixel(point)
+      SDL.LockSurface(@sdl_surface)
+      result = basic_get_pix(point)
+      SDL.UnlockSurface(@sdl_surface)
+      return result
+    end
+
+    # Sets the color at +point+.
+    def set_pixel(point, new)
+      SDL.LockSurface(@sdl_surface)
+      result = basic_set_pix(point, new)
+      SDL.UnlockSurface(@sdl_surface)
+      return result
+    end
+
+    # Returns a two-dimensional array (from https://rubygems.org/gems/2DArray)
+    # containing each pixel color at its proper position.
+    #
+    # There's probably a better way to implement this... :/
+    def pixels
+      ary = Array2D.new(width, height)
+      x = 0
+      y = 0
+      SDL.LockSurface(@sdl_surface)
+      ary.each { |elem, elem_x, elem_y|
+        ary[elem_x, elem_y] = basic_get_pix(Point[elem_x, elem_y]) }
+      SDL.UnlockSurface(@sdl_surface)
+      ary
+    end
+
+    # Returns the area of this surface; e.g. if +width+ were 5 and +height+ were
+    # 4, this method would return 20.
+    def area
+      width * height
+    end
   end
 end

@@ -79,6 +79,8 @@ module Rubydraw
       end
     end
 
+    alias :eql? :==
+
     def to_ary
       [@x, @y]
     end

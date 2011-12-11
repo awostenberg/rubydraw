@@ -18,9 +18,15 @@ module Rubydraw
       }
     end
 
+    # Create a new color from an array with the format [r, g, b, a].
+    # Ignores any extraneous values.
+    def self.from_ary(ary)
+      return self.new(ary[0], ary[1], ary[2], ary[3])
+    end
+
     # Shorthand new method.
-    def self.[](red, green, blue, alpha = 0)
-      self.new(red, green, blue, alpha)
+    def self.[](*args)
+      self.new(*args)
     end
 
     attr_reader(:red, :green, :blue, :alpha)
@@ -29,7 +35,7 @@ module Rubydraw
     # values. Alpha is 0 by default.
     #
     # TODO: Add other color specs, like HSV or maybe CYMK
-    def initialize(red, green, blue, alpha = 255)
+    def initialize(red, green, blue, alpha=255)
       unless self.class.in_bounds?(red, green, blue, alpha)
         raise IndexError, "One or more color values are out of bounds (must be between 0 and 255)"
       end

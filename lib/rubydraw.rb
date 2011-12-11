@@ -1,5 +1,6 @@
-# The only dependency
+# Require dependencies
 require 'ruby-sdl-ffi'
+require '2DArray'
 
 # The extentions must be loaded first, except for +aliases.rb+
 require 'ext/string'
@@ -19,7 +20,8 @@ files = %w[
   point
   color
   sdl_error
-  rectangle]
+  rectangle
+  mouse_state]
 files.each { |f| require("rubydraw/" + f) }
 
 # This must be loaded last, because it sets up constants that "point" to Rubydraw classes, hence
