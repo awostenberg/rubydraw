@@ -53,6 +53,10 @@ module Rubydraw
       @sdl_surface.h
     end
 
+    def size
+      Point[width, height]
+    end
+
     # Fills this surface with the given color.
     def fill(color)
       SDL.FillRect(@sdl_surface, nil, color.to_i(:surface))
@@ -123,6 +127,8 @@ module Rubydraw
     # information.
     def basic_set_pix(point, new_color)
       color = new_color.to_i(:surface)
+      color = 0xff_ff_ff
+      puts color
 
       bpp = @sdl_surface.format.BytesPerPixel
       p = @sdl_surface.pixels + (point.y * @sdl_surface.pitch + point.x * bpp)
@@ -181,6 +187,27 @@ module Rubydraw
         ary[elem_x, elem_y] = basic_get_pix(Point[elem_x, elem_y]) }
       SDL.UnlockSurface(@sdl_surface)
       ary
+    end
+
+    # Flip the surface on an axis.
+    def flip(axis)
+      axis = axis.to_sym
+      if axis == :horizontal
+        pixels.each {
+          |color, x, y|
+          set_pixel(Point[x, height - y], color)
+        }
+        return self
+      end
+      if axis == :vertical
+        pixels.each {
+          |color, x, y|
+          set_pixel(Point[width - x, y], color)
+        }
+        return self
+      end
+      # Only get here if no axis mode was matched.
+      raise ArgumentError, "Unknown flip mode: \"#{axis}\""
     end
 
     # Returns the area of this surface; e.g. if +width+ were 5 and +height+ were

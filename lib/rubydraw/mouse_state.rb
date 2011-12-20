@@ -21,9 +21,14 @@ module Rubydraw
     end
   end
 
-  # Return the current mouse condition.
-  def self.mouse_state
+  # Returns the current mouse condition.
+  def self.info
     state = SDL.GetMouseState
     MouseState.new(state[0], Point[state[1], state[2]])
+  end
+
+  # Returns the current mouse position.
+  def self.position
+    info.position
   end
 end
