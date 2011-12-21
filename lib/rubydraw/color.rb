@@ -134,6 +134,9 @@ module Rubydraw
     # Other colors
     Purple = new(128, 0, 255)
     Orange = new(255, 128, 0)
+    LimeGreen = new(128, 255, 0)
+    SeaweedGreen = new(0, 255, 128)
+    LightBlue = new(0, 128, 255)
     Pink = new(255, 0, 128)
     Grey = new(128, 128, 128)
   end
