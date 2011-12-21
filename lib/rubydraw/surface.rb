@@ -14,7 +14,7 @@ module Rubydraw
     end
 
     # Create a new, blank surface with the given dimensions.
-    def initialize(dimensions)
+    def initialize(dimensions, color=Rubydraw::Color::Black)
       @dimensions = dimensions
       pixel_format = SDL.GetVideoInfo.vfmt
       rmsk, gmsk, bmsk, amsk = 0xff0000, 0x00ff00, 0x0000ff, 0x000000
@@ -23,6 +23,7 @@ module Rubydraw
       if @sdl_surface.pointer.null?
         raise SDLError, "Failed to create Rubydraw surface: #{SDL.GetError}"
       end
+      fill(color)
       self
     end
 
