@@ -3,11 +3,11 @@ module Rubydraw
   # with the text to display. They can be drawn at a position on the
   # screen.
   class Text < Surface
-    attr_reader(:contents, :font, :color, :size)
+    attr_reader(:contents, :font, :color, :font_size)
 
     # Create a new drawable Text object with the given font and contents.
-    def initialize(contents, color, font_name="Times New Roman", size = 25)
-      @font, @contents, @size, @color = font_name, contents, size, color
+    def initialize(contents, color, font_name="Times New Roman", font_size = 25)
+      @font, @contents, @font_size, @color = font_name, contents, font_size, color
       if File.exist?(font_name)
         font_path = font_name
       else
@@ -18,7 +18,7 @@ module Rubydraw
       unless File.exists?(font_path)
         raise "Font file '#{font_name}' does not exist; attemped to load from '#{font_path}'"
       end
-      sdl_text = SDL::TTF.OpenFont(font_path, size)
+      sdl_text = SDL::TTF.OpenFont(font_path, font_size)
       raise(SDLError, "Failed to initialize font: #{SDL.GetError}") if sdl_text.pointer.null?
 
       sdl_color = @color.to_sdl
