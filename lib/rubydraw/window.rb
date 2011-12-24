@@ -125,14 +125,20 @@ module Rubydraw
     end
 
     # Collect and handle new events by executing blocks in +@regestered_events+. See
-    # Rubydraw::Window#register_action on how to use it.
+    # Object#whenever on how to use it.
     def handle_events
       events = @event_queue.get_events
-      events.each { |event|
-        blocks = @registered_actions[event.class]
+      events.each {|event|
+        # +blocks+ is a hashmap; the value being the object that registered it. This
+        # property is only used in Object#unregister_action.
+        events = @registered_actions
+        blocks = events[event.class]
         unless blocks.nil?
-          blocks.each { |b| b.call(event) unless b.nil? }
-        end }
+          blocks.each {|obj, b|
+            b.class unless b.nil?
+          }
+        end
+      }
     end
 
     # Causes the main loop to exit as soon as it get the chance to.
