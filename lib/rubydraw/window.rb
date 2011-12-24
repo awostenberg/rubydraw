@@ -135,7 +135,7 @@ module Rubydraw
         blocks = events[event.class]
         unless blocks.nil?
           blocks.each {|obj, b|
-            b.class unless b.nil?
+            b.call(event) unless b.nil?
           }
         end
       }
