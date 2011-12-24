@@ -13,8 +13,17 @@ module Rubydraw
       Text.new(contents, color)
     end
 
+    def initialize(*args)
+      if args.size == 1
+        # Must mean to wrap an SDL surface.
+        @sdl_surface = args[0]
+      else
+        load_from_color(*args)
+      end
+    end
+
     # Create a new, blank surface with the given dimensions.
-    def initialize(dimensions, color=Rubydraw::Color::Black)
+    def load_from_color(dimensions, color=Rubydraw::Color::Black)
       @dimensions = dimensions
       pixel_format = SDL.GetVideoInfo.vfmt
       rmsk, gmsk, bmsk, amsk = 0xff0000, 0x00ff00, 0x0000ff, 0x000000
@@ -26,6 +35,8 @@ module Rubydraw
       fill(color)
       self
     end
+
+    private :load_from_color
 
     # Blit (copy) into +surface at +position+ (see Rubydraw::Point).
     # No graphical effects are applied.
