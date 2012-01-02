@@ -66,7 +66,7 @@ module Rubydraw
     class UnknownEvent < Event
       # The SDL event should be passed so that the programmer using this library can still
       # attempt to implement behavior, but it will have to match and SDL event, not a
-      # Rubydraw::Events::Event.
+      # Rubydraw Event.
       def from_sdl_event(sdl_event)
         self.new(sdl_event)
       end
@@ -215,7 +215,7 @@ module Rubydraw
     # Rubydraw::Events::FocusGain and Rubydraw::Events::FocusLose.
     class FocusEvent < Event
       def self.wants_to_match?
-        false
+        not self == FocusEvent
       end
 
       def self.matching_sdl_type
@@ -226,10 +226,6 @@ module Rubydraw
     # Created when the window gains focus, e.g. clicking on the window after previously using
     # another application.
     class FocusGain < FocusEvent
-      def self.wants_to_match?
-        true
-      end
-
       # Redefine Event#matches? because both this class and Rubydraw::Events::FocusLoss use
       # SDL::ActiveEvent.
       def self.matches?(sdl_event)
@@ -242,10 +238,6 @@ module Rubydraw
 
     # Created when the window loses focus.
     class FocusLoss < FocusEvent
-      def self.wants_to_match?
-        true
-      end
-
       # Redefine Event#matches? because both this class and Rubydraw::Events::FocuGain use
       # SDL::ActiveEvent
       def self.matches?(sdl_event)

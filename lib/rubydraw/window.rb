@@ -58,6 +58,10 @@ module Rubydraw
       end
     end
 
+    def size
+      Point[width, height]
+    end
+
     # Call this method to start updating and drawing.
     def show
       @open = true
