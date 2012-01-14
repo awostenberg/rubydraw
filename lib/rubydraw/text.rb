@@ -7,7 +7,7 @@ module Rubydraw
 
     # Create a new drawable Text object with the given font and contents.
     def initialize(contents, color, font_name="Times New Roman", font_size = 25)
-      @font, @contents, @font_size, @color = font_name, contents, font_size, color
+      @contents, @font, @font_size, @color = contents, font_name, font_size, color
       if File.exist?(font_name)
         font_path = font_name
       else
@@ -23,6 +23,17 @@ module Rubydraw
 
       sdl_color = @color.to_sdl
       @sdl_surface = SDL::TTF.RenderText_Blended(sdl_text, @contents, sdl_color)
+    end
+
+    # Redefined because if @text is an empty string, it would
+    # return nil.
+    def width
+      super or 0
+    end
+
+    # See Rubydraw::Text#width
+    def height
+      super or 0
     end
   end
 end

@@ -6,7 +6,7 @@ module Rubydraw
   # Rubydraw::Sound#new:    Creates a new sound with the given file path
   #
   # Rubydraw::Sound#play:   Plays the sound. *Note*: this method exits
-  # immediatley; it doesn't wait until the sound is finished.
+  # immediately; it doesn't wait until the sound is finished.
   class Sound
     # Used to specify the volume (from 0 to 1) when this sound is played.
     # Set at 1 by default
@@ -19,11 +19,11 @@ module Rubydraw
       full_path = File.expand_path path
       SDL::Mixer.OpenAudio(22050, SDL::AUDIO_S16SYS, 2, 1024)
       @sdl_sound = SDL::Mixer::LoadWAV(full_path)
-      # Ususally happens because the file doesn't exist.
+      # Usually happens because the file doesn't exist.
       if @sdl_sound.pointer.null?
-        raise SDLError "Failed to load sound from: #{full_path} because '#{SDL.GetError}'"
+        raise SDLError, "Failed to load sound from: #{full_path} because '#{SDL.GetError}'"
       end
-      # The default volume. Can be changed with Sound's volume arrtibute.
+      # The default volume. Can be changed with Sound's volume attribute.
       @volume = 1
       # Allocate a new SDL channel all for this sound to use.
       @channel = SDL::Mixer.AllocateChannels(SDL::Mixer.AllocateChannels(-1) + 1) - 1
