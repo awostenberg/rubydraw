@@ -1,0 +1,256 @@
+// !$*UTF8*$!
+{
+	172754BD107597F200D0347B /* Unit Tests */ = {
+		activeExec = 0;
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 3814839C14C4A242003574E8 /* RubydrawWrapper */;
+		activeTarget = 8D1107260486CEB800E47090 /* RubydrawWrapper */;
+		addToTargets = (
+			8D1107260486CEB800E47090 /* RubydrawWrapper */,
+		);
+		codeSenseManager = 381483A214C4A24D003574E8 /* Code sense */;
+		executables = (
+			3814839C14C4A242003574E8 /* RubydrawWrapper */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = 1;
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					981,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXFileTableDataSource3.PBXSymbolsDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXSymbolsDataSource_SymbolNameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					16,
+					200,
+					50,
+					921,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXSymbolsDataSource_SymbolTypeIconID,
+					PBXSymbolsDataSource_SymbolNameID,
+					PBXSymbolsDataSource_SymbolTypeID,
+					PBXSymbolsDataSource_ReferenceNameID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 348443776;
+			PBXWorkspaceStateSaveDate = 348443776;
+		};
+		perUserProjectItems = {
+			381483E414C4A441003574E8 = 381483E414C4A441003574E8 /* PBXTextBookmark */;
+			381483F314C4A4D6003574E8 = 381483F314C4A4D6003574E8 /* PlistBookmark */;
+			3814847F14C4CBAC003574E8 = 3814847F14C4CBAC003574E8 /* PBXTextBookmark */;
+			3814849414C4CC18003574E8 = 3814849414C4CC18003574E8 /* PBXTextBookmark */;
+			3814849F14C4CD6F003574E8 = 3814849F14C4CD6F003574E8 /* PBXTextBookmark */;
+			381484AA14C4CD8C003574E8 = 381484AA14C4CD8C003574E8 /* PBXTextBookmark */;
+			381484D814C4D38A003574E8 = 381484D814C4D38A003574E8 /* PBXTextBookmark */;
+			381484D914C4D38A003574E8 = 381484D914C4D38A003574E8 /* PBXTextBookmark */;
+			381484DA14C4D38A003574E8 = 381484DA14C4D38A003574E8 /* PBXTextBookmark */;
+			381484FD14C4D48B003574E8 /* PBXTextBookmark */ = 381484FD14C4D48B003574E8 /* PBXTextBookmark */;
+		};
+		sourceControlManager = 381483A114C4A24D003574E8 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	29B97316FDCFA39411CA2CEA /* main.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1267, 485}}";
+			sepNavSelRange = "{442, 0}";
+			sepNavVisRange = "{0, 628}";
+			sepNavWindowFrame = "{{15, 4}, {967, 1174}}";
+		};
+	};
+	3814839C14C4A242003574E8 /* RubydrawWrapper */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = RubydrawWrapper;
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+		variableFormatDictionary = {
+		};
+	};
+	381483A114C4A24D003574E8 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	381483A214C4A24D003574E8 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	381483A314C4A275003574E8 /* loader.rb */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1267, 485}}";
+			sepNavSelRange = "{229, 0}";
+			sepNavVisRange = "{0, 467}";
+		};
+	};
+	381483B014C4A2C0003574E8 /* Ruby.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = Ruby.h;
+		path = /Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/Ruby.framework/Headers/Ruby.h;
+		sourceTree = "<absolute>";
+	};
+	381483E414C4A441003574E8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 381483B014C4A2C0003574E8 /* Ruby.h */;
+		name = "Ruby.h: 87";
+		rLen = 0;
+		rLoc = 1970;
+		rType = 0;
+		vrLen = 826;
+		vrLoc = 1438;
+	};
+	381483F314C4A4D6003574E8 /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = /Users/alanwostenberg/Desktop/RubydrawWrapper/Info.plist;
+		rLen = 0;
+		rLoc = 9223372036854775808;
+	};
+	3814847F14C4CBAC003574E8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 381483A314C4A275003574E8 /* loader.rb */;
+		name = "main.rb: 7";
+		rLen = 0;
+		rLoc = 467;
+		rType = 0;
+		vrLen = 148;
+		vrLoc = 0;
+	};
+	3814849414C4CC18003574E8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 29B97316FDCFA39411CA2CEA /* main.m */;
+		name = "main.m: 16";
+		rLen = 0;
+		rLoc = 373;
+		rType = 0;
+		vrLen = 589;
+		vrLoc = 0;
+	};
+	3814849F14C4CD6F003574E8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 29B97316FDCFA39411CA2CEA /* main.m */;
+		name = "main.m: 16";
+		rLen = 0;
+		rLoc = 373;
+		rType = 0;
+		vrLen = 589;
+		vrLoc = 0;
+	};
+	381484AA14C4CD8C003574E8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 29B97316FDCFA39411CA2CEA /* main.m */;
+		name = "main.m: 16";
+		rLen = 0;
+		rLoc = 373;
+		rType = 0;
+		vrLen = 589;
+		vrLoc = 0;
+	};
+	381484D814C4D38A003574E8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 381483A314C4A275003574E8 /* loader.rb */;
+		name = "rb_main.rb: 10";
+		rLen = 0;
+		rLoc = 335;
+		rType = 0;
+		vrLen = 751;
+		vrLoc = 0;
+	};
+	381484D914C4D38A003574E8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 29B97316FDCFA39411CA2CEA /* main.m */;
+		name = "main.m: 22";
+		rLen = 0;
+		rLoc = 589;
+		rType = 0;
+		vrLen = 626;
+		vrLoc = 0;
+	};
+	381484DA14C4D38A003574E8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 29B97316FDCFA39411CA2CEA /* main.m */;
+		name = "main.m: 16";
+		rLen = 0;
+		rLoc = 436;
+		rType = 0;
+		vrLen = 629;
+		vrLoc = 0;
+	};
+	381484FD14C4D48B003574E8 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 29B97316FDCFA39411CA2CEA /* main.m */;
+		name = "main.m: 16";
+		rLen = 0;
+		rLoc = 436;
+		rType = 0;
+		vrLen = 629;
+		vrLoc = 0;
+	};
+	4D1A51A110A4FF5D0046A98A /* Compile */ = {
+		activeExec = 0;
+	};
+	4D1A51A510A4FF640046A98A /* Embed */ = {
+		activeExec = 0;
+	};
+	8D1107260486CEB800E47090 /* RubydrawWrapper */ = {
+		activeExec = 0;
+		executables = (
+			3814839C14C4A242003574E8 /* RubydrawWrapper */,
+		);
+	};
+}
