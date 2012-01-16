@@ -18,6 +18,8 @@ int main(int argc, char *argv[])
 	ruby_init();
 	// Load the file
 	rb_load_file(rb_main);
+	[bund release];
+	[rb_main release];
 	// Run the file
 	return ruby_run();
 }
