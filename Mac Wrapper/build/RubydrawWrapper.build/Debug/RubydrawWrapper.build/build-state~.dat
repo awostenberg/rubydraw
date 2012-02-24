@@ -1,0 +1,169 @@
+TRubydrawWrapper
+v7
+r0
+t348443782.156286
+cCheck dependencies
+cProcessInfoPlistFile "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/Info.plist" Info.plist
+cCopyStringsFile "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/Resources/English.lproj/InfoPlist.strings" English.lproj/InfoPlist.strings
+cCompileXIB "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/English.lproj/MainMenu.xib"
+cCpResource build/Debug/RubydrawWrapper.app/Contents/Resources/rb_main.rb rb_main.rb
+cCompileC build/RubydrawWrapper.build/Debug/RubydrawWrapper.build/Objects-normal/x86_64/main.o "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/main.m" normal x86_64 objective-c com.apple.compilers.gcc.4_2
+cLd "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/MacOS/RubydrawWrapper" normal x86_64
+cTouch "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app"
+
+N/Developer/SDKs/MacOSX10.5.sdk
+c000000004AB44D2500000000000000EE
+t1253330213
+s238
+
+N/Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/Cocoa.framework/Headers/Cocoa.h
+c0000000040C4AA6800000000000001E5
+t1086630504
+s485
+
+N/Developer/SDKs/MacOSX10.5.sdk/System/Library/Frameworks/Ruby.framework/Ruby
+c000000004A0CC11E000000000002FC04
+t1242349854
+s195588
+
+N/System/Library/Frameworks/Cocoa.framework/Cocoa
+c000000004A1F2D63000000000000A5E0
+t1243557219
+s42464
+
+N/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/English.lproj/InfoPlist.strings
+c000000004F146AC200000000000000C4
+t1326738114
+s196
+
+N/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/English.lproj/MainMenu.xib
+c000000004F146AC2000000000001B56C
+t1326738114
+s111980
+
+N/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app
+t1326750982
+s102
+
+N/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/Info.plist
+t1326750980
+s793
+
+N/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/MacOS/RubydrawWrapper
+t1326750982
+s9496
+
+N/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/PkgInfo
+t1326750980
+s8
+
+N/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/Resources/English.lproj/InfoPlist.strings
+t1326750981
+s196
+
+N/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/Resources/English.lproj/MainMenu.nib
+t1326750981
+s19258
+
+N/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/Resources/rb_main.rb
+t1326750981
+s777
+
+N/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/RubydrawWrapper.build/Debug/RubydrawWrapper.build/Objects-normal/x86_64/RubydrawWrapper.LinkFileList
+c000000004F149D04000000000000008D
+t1326750980
+s141
+
+N/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/RubydrawWrapper.build/Debug/RubydrawWrapper.build/Objects-normal/x86_64/main.o
+t1326750982
+s7796
+
+N/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/main.m
+c000000004F149BFC0000000000000275
+t1326750716
+s629
+i<Cocoa/Cocoa.h>
+
+N/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/rb_main.rb
+c000000004F149CAE0000000000000309
+t1326750894
+s777
+
+NInfo.plist
+c000000004F146AC2000000000000034C
+t1326738114
+s844
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies348443780#348443781#0(0"0(0#1#0"4300885448#0"0#
+
+CCompileC build/RubydrawWrapper.build/Debug/RubydrawWrapper.build/Objects-normal/x86_64/main.o "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/main.m" normal x86_64 objective-c com.apple.compilers.gcc.4_2
+s348443781.294223
+e348443782.125750
+r1
+xCompileC
+xbuild/RubydrawWrapper.build/Debug/RubydrawWrapper.build/Objects-normal/x86_64/main.o
+x/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/main.m
+xnormal
+xx86_64
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/main.m: In function 'main':
+o/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/main.m:16: warning: initialization discards qualifiers from pointer target type
+o/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/main.m:22: warning: invalid receiver type 'char *'
+lSLF07#2@70"Compile /Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/main.m348443781#348443782#0(327"/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/main.m: In function 'main':/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/main.m:16: warning: initialization discards qualifiers from pointer target type/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/main.m:22: warning: invalid receiver type 'char *'2(22@59"Initialization discards qualifiers from pointer target type348443781#84#136#0(6@62"/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/main.m348443516#16#0#16#0#0"0(22@30"Invalid receiver type 'char *'348443781#220#107#0(6@62"/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/main.m348443516#22#0#22#0#0"0(0#0#62"/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/main.m4300885448#1216"    cd "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x objective-c -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -mfix-and-continue -fobjc-gc-only -mmacosx-version-min=10.5 -gdwarf-2 "-I/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/RubydrawWrapper.build/Debug/RubydrawWrapper.build/RubydrawWrapper.hmap" "-F/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug" "-F/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug" "-I/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/include" "-I/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/RubydrawWrapper.build/Debug/RubydrawWrapper.build/DerivedSources/x86_64" "-I/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/RubydrawWrapper.build/Debug/RubydrawWrapper.build/DerivedSources" -c "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/main.m" -o "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/RubydrawWrapper.build/Debug/RubydrawWrapper.build/Objects-normal/x86_64/main.o"0#
+
+CCompileXIB "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/English.lproj/MainMenu.xib"
+s348443780.988223
+e348443781.294135
+r1
+xCompileXIB
+x/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/English.lproj/MainMenu.xib
+lSLF07#2@37"CompileXIB English.lproj/MainMenu.xib348443780#348443781#0(0"0(0#0#82"/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/English.lproj/MainMenu.xib4300885448#392"    cd "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/Resources/English.lproj/MainMenu.nib" "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/English.lproj/MainMenu.xib"0#
+
+CCopyStringsFile "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/Resources/English.lproj/InfoPlist.strings" English.lproj/InfoPlist.strings
+s348443780.986433
+e348443781.026691
+r1
+xCopyStringsFile
+x/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/Resources/English.lproj/InfoPlist.strings
+xEnglish.lproj/InfoPlist.strings
+lSLF07#2@36"Copy English.lproj/InfoPlist.strings348443780#348443781#0(0"0(0#0#87"/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/English.lproj/InfoPlist.strings4300885448#412"    cd "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper"    setenv ICONV /usr/bin/iconv    /Developer/Library/Xcode/Plug-ins/CoreBuildTasks.xcplugin/Contents/Resources/copystrings --validate --inputencoding utf-16 --outputencoding UTF-16 English.lproj/InfoPlist.strings --outdir "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/Resources/English.lproj"0#
+
+CCpResource build/Debug/RubydrawWrapper.app/Contents/Resources/rb_main.rb rb_main.rb
+s348443781.026774
+e348443781.031805
+r1
+xCpResource
+xbuild/Debug/RubydrawWrapper.app/Contents/Resources/rb_main.rb
+xrb_main.rb
+lSLF07#2@15"Copy rb_main.rb348443781#348443781#0(0"0(0#0#66"/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/rb_main.rb4300885448#391"    cd "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/rb_main.rb" "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/Resources"0#
+
+CLd "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/MacOS/RubydrawWrapper" normal x86_64
+s348443782.125843
+e348443782.153760
+r1
+xLd
+x/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/MacOS/RubydrawWrapper
+xnormal
+xx86_64
+lSLF07#2@123"Link /Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/MacOS/RubydrawWrapper348443782#348443782#0(0"0(0#0#0"4300885448#765"    cd "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper"    setenv MACOSX_DEPLOYMENT_TARGET 10.5    /Developer/usr/bin/gcc-4.2 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.5.sdk "-L/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug" "-F/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug" "-F/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug" -filelist "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/RubydrawWrapper.build/Debug/RubydrawWrapper.build/Objects-normal/x86_64/RubydrawWrapper.LinkFileList" -mmacosx-version-min=10.5 -framework Cocoa -framework Ruby -o "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/MacOS/RubydrawWrapper"0#
+
+CProcessInfoPlistFile "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/Info.plist" Info.plist
+s348443780.983354
+e348443780.986363
+r1
+xProcessInfoPlistFile
+x/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/Info.plist
+xInfo.plist
+lSLF07#2@18"Process Info.plist348443780#348443781#0(0"0(0#0#66"/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/Info.plist4300885448#375"    cd "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper"    builtin-infoPlistUtility Info.plist -genpkginfo "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/PkgInfo" -expandbuildsettings -platform macosx -o "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app/Contents/Info.plist"0#
+
+CTouch "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app"
+s348443782.153855
+e348443782.156261
+r1
+xTouch
+x/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app
+lSLF07#2@93"Touch /Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app348443782#348443782#0(0"0(0#0#0"4300885448#177"    cd "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper"    /usr/bin/touch -c "/Users/alanwostenberg/Desktop/John/rubydraw/Mac Wrapper/build/Debug/RubydrawWrapper.app"0#
+
