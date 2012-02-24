@@ -64,14 +64,17 @@ module Rubydraw
     # Call this method to start updating and drawing.
     def show
       @open = true
-      # Behold, the main loop. Drumroll!
+      # First, create the SDL video surface.
       @screen = SDL::SetVideoMode(@width, @height, 0, @flags)
+      # Now, fill it with the background color.
+      clear
+      # Behold, the main loop. Drumroll!
       loop do
         handle_events
         if @open
           unless @persistent
             # Clear the contents of the window
-            clear
+            refresh
           end
           tick
           # Update the screen to show any changes.
@@ -83,6 +86,13 @@ module Rubydraw
       end
     end
 
+    # This method fills the entire window with the given color, use this for
+    # quick-and-dirty screen refreshing. Otherwise use Rubydraw::Window#clear because
+    # it's faster.
+    def clear
+      fill_with(@bkg_color)
+    end
+
     # This tells the window what area to erase to clear the window so that it only clears
     # what needs to be.
     def add_space_to_clear(rect)
@@ -90,8 +100,9 @@ module Rubydraw
     end
 
     # Clear the window's contents by repairing only damaged areas. This is done by creating
-    # a new surface for each region.
-    def clear
+    # a new surface for each region with the background color, then blitting it to the window
+    # where the damaged area was.
+    def refresh
       # old code
       #fill_with(@bkg_color)
       # new code
