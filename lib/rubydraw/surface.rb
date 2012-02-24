@@ -41,8 +41,8 @@
     # Blit (copy) into +surface at +position+ (see Rubydraw::Point).
     # No graphical effects are applied.
     def blit(surface, position, damaging=true)
-      source_rect = Rectangle[Point[0, 0], Point[width, height]]
-      blit_rect = Rectangle[position, Point[surface.width, surface.height]]
+      source_rect = Rectangle[Point[0, 0], size]
+      blit_rect = Rectangle[position, size]
       if surface.window? and damaging
         surface.add_space_to_clear(blit_rect)
       end
